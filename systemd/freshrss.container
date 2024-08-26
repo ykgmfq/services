@@ -1,0 +1,10 @@
+[Container]
+AutoUpdate=local
+Environment=TZ=Europe/Berlin
+Image=localhost/freshrss
+PublishPort=8090:80
+Volume=freshrss:/srv/FreshRSS/data
+
+[Install]
+WantedBy=prod.target
+

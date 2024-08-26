@@ -1,0 +1,3 @@
+[Unit]
+Requires=php-fpm.service caddy.service
+After=php-fpm.service caddy.service

@@ -1,0 +1,17 @@
+[Unit]
+Wants=image-build@%N.timer
+After=home.service
+
+[Container]
+Image=localhost/nodered
+Environment=TZ=Europe/Berlin
+#PublishPort=1880:1880
+Network=host
+#User=110
+#Group=0
+Volume=home-nodered:/data
+AutoUpdate=local
+
+[Install]
+WantedBy=prod.target
+

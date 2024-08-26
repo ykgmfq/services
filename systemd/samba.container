@@ -1,0 +1,13 @@
+[Unit]
+Wants=image-build@%N.timer
+
+[Container]
+Image=localhost/samba
+PublishPort=445:445
+AutoUpdate=local
+Volume=media:/srv/media
+Volume=docs-scan:/srv/scans
+
+[Install]
+WantedBy=prod.target
+

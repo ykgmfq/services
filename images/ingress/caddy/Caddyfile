@@ -1,0 +1,27 @@
+{
+	admin off
+	email free-software@dm-poepperl.de
+	log default {
+		output stdout
+		level warn
+		format console
+	}
+}
+(baseheader) {
+	header {
+		Strict-Transport-Security "max-age=63072000; includeSubDomains; preload"
+		-x-powered-by
+		-server
+	}
+}
+(stdheader) {
+	import baseheader
+	header {
+		?X-Frame-Options "sameorigin"
+		?Referrer-Policy "strict-origin"
+		?Content-Security-Policy "default-src https:"
+		?X-XSS-Protection "1; mode=block"
+		?X-Content-Type-Options "nosniff"
+	}
+}
+import sites/*

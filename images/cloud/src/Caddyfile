@@ -1,0 +1,34 @@
+{
+	admin off
+	auto_https off
+	log default {
+		output stdout
+		level warn
+		format console
+	}
+}
+:80 {
+	root * /srv/de.dm-poepperl.cloud/html
+	file_server
+	php_fastcgi localhost:8000
+	@dav {
+		path /.well-known/carddav
+		path /.well-known/caldav
+	}
+	@forbidden {
+		path /.htaccess
+		path /data/
+		path /config/
+		path /db_structure
+		path /.xml
+		path /README
+		path /3rdparty/
+		path /lib/
+		path /templates/*
+		path /occ
+		path /console.php
+	}
+	respond /alive "File server is alive!"
+	respond @forbidden 404
+	redir @dav /remote.php/dav permanent
+}

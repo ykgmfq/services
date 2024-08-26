@@ -1,0 +1,10 @@
+[Container]
+Image=docker.io/library/postgres:15-alpine
+PublishPort=8432:5432
+Environment=POSTGRES_PASSWORD=3YSZdA3LRKAZmpLQh8VLWnpDFoaX8z
+Volume=home-recorder:/var/lib/postgresql/data
+AutoUpdate=registry
+
+[Install]
+WantedBy=prod.target
+

@@ -1,0 +1,8 @@
+[Unit]
+
+[Service]
+User=cloud
+Type=oneshot
+ExecStart=/usr/bin/php occ app:update --all
+ExecStart=/usr/bin/php updater/updater.phar --no-interaction
+WorkingDirectory=/srv/de.dm-poepperl.cloud/html

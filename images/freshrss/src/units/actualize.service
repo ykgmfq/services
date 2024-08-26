@@ -1,0 +1,7 @@
+[Service]
+User=freshrss
+Type=oneshot
+KillMode=process
+ExecStart=/usr/bin/php actualize_script.php
+WorkingDirectory=/srv/FreshRSS/app/
+

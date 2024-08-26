@@ -1,0 +1,15 @@
+[Unit]
+#BindsTo=dev-conbee.device
+After=dev-conbee.device network-online.target
+Wants=home-upgrade.timer
+
+[Container]
+Image=localhost/home-assistant
+Network=host
+Volume=home:/config
+AddDevice=/dev/serial/by-id/usb-dresden_elektronik_ingenieurtechnik_GmbH_ConBee_II_DE2130827-if00:/dev/conbee
+AutoUpdate=local
+
+[Install]
+WantedBy=prod.target
+

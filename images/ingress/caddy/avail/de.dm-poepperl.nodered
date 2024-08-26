@@ -1,0 +1,6 @@
+nodered.dm-poepperl.de {
+  reverse_proxy localhost:1880
+  import stdheader
+  header / Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; connect-src 'self';"
+  encode zstd gzip
+}

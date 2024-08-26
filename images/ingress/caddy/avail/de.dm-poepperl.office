@@ -1,0 +1,7 @@
+office.dm-poepperl.de {
+  reverse_proxy localhost:9980
+  respond /browser/*/welcome/* 200
+  # Mozilla Observatory B+
+  import stdheader
+  encode zstd gzip
+}

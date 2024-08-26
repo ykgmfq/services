@@ -1,0 +1,7 @@
+[Unit]
+
+[Timer]
+OnCalendar=Sun
+
+[Install]
+WantedBy=default.target

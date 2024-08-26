@@ -1,0 +1,8 @@
+# Mozilla Observatory ?
+# https://observatory.mozilla.org/analyze/gallery.dm-poepperl.de
+gallery.dm-poepperl.de {
+  reverse_proxy localhost:8089
+  import baseheader
+#  header Content-Security-Policy "default-src https:"
+  encode zstd gzip
+}

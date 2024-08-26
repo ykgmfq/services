@@ -1,0 +1,8 @@
+[Unit]
+BindsTo=php-fpm.service
+
+[Timer]
+OnCalendar=*:0/15
+
+[Install]
+WantedBy=default.target

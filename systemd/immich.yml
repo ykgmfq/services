@@ -1,0 +1,65 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    io.containers.autoupdate: registry
+  labels:
+    app: immich-pod
+  name: immich-pod
+spec:
+  containers:
+    - name: app
+      image: ghcr.io/immich-app/immich-server:release
+      volumeMounts:
+        - mountPath: /usr/src/app/upload
+          name: immich-pvc
+      env:
+        - name: TZ
+          value: Europe/Berlin
+        - name: DB_PASSWORD
+          value: a
+        - name: DB_USERNAME
+          value: postgres
+        - name: DB_DATABASE_NAME
+          value: postgres
+        - name: DB_HOSTNAME
+          value: localhost
+        - name: REDIS_HOSTNAME
+          value: localhost
+        - name: IMMICH_MACHINE_LEARNING_URL
+          value: http://localhost:3003
+      ports:
+        - name: web
+          containerPort: 3001
+          hostPort: 8089
+    - name: ml
+      image: ghcr.io/immich-app/immich-machine-learning:release
+      volumes:
+        - immich-modelcache-pvc:/cache
+    - name: redis
+      image: docker.io/library/redis:6-alpine
+      volumeMounts:
+        - mountPath: /data
+          name: immich-redis-pvc
+    - name: db
+      image: docker.io/tensorchord/pgvecto-rs:pg16-v0.2.1
+      env:
+        - name: POSTGRES_PASSWORD
+          value: a
+      volumeMounts:
+        - mountPath: /var/lib/postgresql/data
+          name: immich-db-pvc
+  volumes:
+    - name: immich-pvc
+      persistentVolumeClaim:
+        claimName: immich
+    - name: immich-db-pvc
+      persistentVolumeClaim:
+        claimName: immich-db
+    - name: immich-modelcache-pvc
+      persistentVolumeClaim:
+        claimName: immich-modelcache
+    - name: immich-redis-pvc
+      persistentVolumeClaim:
+        claimName: immich-redis

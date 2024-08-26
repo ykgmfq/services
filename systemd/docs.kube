@@ -1,0 +1,9 @@
+[Unit]
+Wants=image-build@%N.timer
+
+[Kube]
+Yaml=/etc/containers/systemd/docs.yml
+
+[Install]
+WantedBy=prod.target
+

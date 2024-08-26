@@ -1,0 +1,8 @@
+# Mozilla Observatory C
+# https://observatory.mozilla.org/analyze/audiobookshelf.dm-poepperl.de
+audiobookshelf.dm-poepperl.de {
+  reverse_proxy localhost:13378
+  import baseheader
+#  header Content-Security-Policy "default-src https:"
+  encode zstd gzip
+}

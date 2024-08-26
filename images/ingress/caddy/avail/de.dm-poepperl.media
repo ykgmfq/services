@@ -1,0 +1,6 @@
+media.dm-poepperl.de {
+  reverse_proxy localhost:8096
+  import stdheader
+  header Content-Security-Policy "base-uri 'none'; connect-src 'self'; default-src 'none'; font-src 'self'; form-action 'self'; frame-ancestors 'none'; frame-src 'self'; img-src 'self'; media-src 'self' data:; object-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'"
+  encode zstd gzip
+}

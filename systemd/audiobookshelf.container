@@ -1,0 +1,13 @@
+[Container]
+AutoUpdate=registry
+Environment=TZ=Europe/Berlin
+Image=ghcr.io/advplyr/audiobookshelf
+PublishPort=13378:80
+Volume=media:/media
+Volume=audiobookshelf:/config
+Volume=audiobookshelf-metadata:/metadata
+Volume=audiobookshelf-podcasts:/podcasts
+
+[Install]
+WantedBy=prod.target
+

@@ -1,0 +1,6 @@
+monitor.dm-poepperl.de {
+  reverse_proxy localhost:8089
+  # Mozilla Observatory B+
+  import stdheader
+  encode zstd gzip
+}

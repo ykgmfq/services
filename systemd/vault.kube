@@ -1,0 +1,6 @@
+[Kube]
+Yaml=/etc/containers/systemd/vault.yml
+
+[Install]
+WantedBy=prod.target
+

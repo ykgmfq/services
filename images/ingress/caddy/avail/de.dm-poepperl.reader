@@ -1,0 +1,8 @@
+# Mozilla Observatory C
+# https://observatory.mozilla.org/analyze/reader.dm-poepperl.de
+reader.dm-poepperl.de {
+  reverse_proxy localhost:8090
+  import baseheader
+#  header Content-Security-Policy "default-src https:"
+  encode zstd gzip
+}

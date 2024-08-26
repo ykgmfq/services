@@ -1,0 +1,12 @@
+[Unit]
+Wants=image-build@%N.timer
+
+[Container]
+Image=localhost/ingress
+Network=host
+AutoUpdate=local
+Volume=ingress:/data
+
+[Install]
+WantedBy=prod.target
+

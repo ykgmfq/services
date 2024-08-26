@@ -1,0 +1,10 @@
+www.dm-poepperl.de {
+  import stdheader
+  redir https://dm-poepperl.de{uri} permanent
+}
+dm-poepperl.de {
+  respond 200
+  # Mozilla Obeservatory A+
+  import stdheader
+  encode zstd gzip
+ }

@@ -1,0 +1,3 @@
+[Unit]
+Requires=php-fpm.service
+After=php-fpm.service

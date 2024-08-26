@@ -1,0 +1,11 @@
+[Unit]
+Wants=image-build@%N.timer
+
+[Container]
+Image=localhost/avahi
+Network=host
+AutoUpdate=local
+
+[Install]
+WantedBy=prod.target
+
