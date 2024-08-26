@@ -1,4 +1,5 @@
 [Unit]
+Restart=on-failure
 Wants=image-build@%N.timer
 
 [Container]
@@ -10,4 +11,3 @@ Volume=docs-scan:/srv/scans
 
 [Install]
 WantedBy=prod.target
-

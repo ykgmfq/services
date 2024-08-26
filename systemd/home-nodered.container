@@ -1,4 +1,5 @@
 [Unit]
+Restart=on-failure
 Wants=image-build@%N.timer
 After=home.service
 
@@ -14,4 +15,3 @@ AutoUpdate=local
 
 [Install]
 WantedBy=prod.target
-

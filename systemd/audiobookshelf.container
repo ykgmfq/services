@@ -1,3 +1,6 @@
+[Unit]
+Restart=on-failure
+
 [Container]
 AutoUpdate=registry
 Environment=TZ=Europe/Berlin
@@ -10,4 +13,3 @@ Volume=audiobookshelf-podcasts:/podcasts
 
 [Install]
 WantedBy=prod.target
-

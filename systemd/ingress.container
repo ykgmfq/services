@@ -1,4 +1,5 @@
 [Unit]
+Restart=on-failure
 Wants=image-build@%N.timer
 
 [Container]
@@ -9,4 +10,3 @@ Volume=ingress:/data
 
 [Install]
 WantedBy=prod.target
-

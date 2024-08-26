@@ -1,3 +1,6 @@
+[Unit]
+Restart=on-failure
+
 [Container]
 Image=docker.io/collabora/code
 PublishPort=9980:9980
@@ -7,4 +10,3 @@ Environment=aliasgroup1="https://cloud.dm-poepperl.de:443"
 
 [Install]
 WantedBy=prod.target
-

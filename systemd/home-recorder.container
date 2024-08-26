@@ -1,3 +1,6 @@
+[Unit]
+Restart=on-failure
+
 [Container]
 Image=docker.io/library/postgres:15-alpine
 PublishPort=8432:5432
@@ -7,4 +10,3 @@ AutoUpdate=registry
 
 [Install]
 WantedBy=prod.target
-

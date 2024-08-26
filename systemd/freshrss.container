@@ -1,3 +1,6 @@
+[Unit]
+Restart=on-failure
+
 [Container]
 AutoUpdate=local
 Environment=TZ=Europe/Berlin
@@ -7,4 +10,3 @@ Volume=freshrss:/srv/FreshRSS/data
 
 [Install]
 WantedBy=prod.target
-
