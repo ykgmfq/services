@@ -1,11 +1,13 @@
 [Unit]
 Wants=image-build@%N.timer
-Restart=on-failure
 
 [Container]
 Image=localhost/avahi
 Network=host
 AutoUpdate=local
+
+[Service]
+Restart=on-failure
 
 [Install]
 WantedBy=prod.target

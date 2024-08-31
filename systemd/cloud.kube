@@ -1,9 +1,11 @@
 [Unit]
-Restart=on-failure
 Wants=image-build@%N.timer
 
 [Kube]
 Yaml=/etc/containers/systemd/cloud.yml
+
+[Service]
+Restart=on-failure
 
 [Install]
 WantedBy=prod.target

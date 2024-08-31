@@ -1,5 +1,4 @@
 [Unit]
-Restart=on-failure
 Wants=image-build@%N.timer
 
 [Container]
@@ -7,6 +6,9 @@ Image=localhost/ingress
 Network=host
 AutoUpdate=local
 Volume=ingress:/data
+
+[Service]
+Restart=on-failure
 
 [Install]
 WantedBy=prod.target

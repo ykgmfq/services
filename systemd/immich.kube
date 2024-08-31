@@ -1,8 +1,8 @@
-[Unit]
-Restart=on-failure
-
 [Kube]
 Yaml=/etc/containers/systemd/immich.yml
+
+[Service]
+Restart=on-failure
 
 [Install]
 WantedBy=prod.target

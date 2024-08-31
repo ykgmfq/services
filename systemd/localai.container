@@ -1,11 +1,11 @@
-[Unit]
-Restart=on-failure
-
 [Container]
 AutoUpdate=registry
 Image=quay.io/go-skynet/local-ai:latest-cpu
 PublishPort=8080:8080
 Volume=localai-models:/build/models
+
+[Service]
+Restart=on-failure
 
 [Install]
 WantedBy=prod.target

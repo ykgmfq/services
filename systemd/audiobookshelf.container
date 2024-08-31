@@ -1,6 +1,3 @@
-[Unit]
-Restart=on-failure
-
 [Container]
 AutoUpdate=registry
 Environment=TZ=Europe/Berlin
@@ -9,7 +6,10 @@ PublishPort=13378:80
 Volume=media:/media
 Volume=audiobookshelf:/config
 Volume=audiobookshelf-metadata:/metadata
-Volume=audiobookshelf-podcasts:/podcasts
+Volume=podcasts:/podcasts
+
+[Service]
+Restart=on-failure
 
 [Install]
 WantedBy=prod.target

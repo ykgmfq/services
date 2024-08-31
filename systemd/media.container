@@ -1,5 +1,4 @@
 [Unit]
-Restart=on-failure
 Wants=image-build@%N.timer
 
 [Container]
@@ -13,6 +12,9 @@ Volume=media:/srv/media
 Volume=media-cache:/var/cache/jellyfin
 Volume=jellyfin:/var/lib/jellyfin
 AddDevice=/dev/dri/:/dev/dri/
+
+[Service]
+Restart=on-failure
 
 [Install]
 WantedBy=prod.target

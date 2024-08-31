@@ -3,5 +3,27 @@
 		{
 			"path": "."
 		}
-	]
+	],
+	"tasks": {
+		"version": "2.0.0",
+		"tasks": [
+			{
+				"label": "daemon",
+				"type": "process",
+				"command": "systemctl",
+				"args": [
+					"daemon-reload"
+				]
+			},
+			{
+				"label": "isolate base",
+				"type": "process",
+				"command": "systemctl",
+				"args": [
+					"isolate",
+					"multi-user"
+				]
+			},
+		]
+	}
 }

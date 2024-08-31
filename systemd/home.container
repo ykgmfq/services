@@ -10,6 +10,8 @@ Volume=home:/config
 AddDevice=/dev/serial/by-id/usb-dresden_elektronik_ingenieurtechnik_GmbH_ConBee_II_DE2130827-if00:/dev/conbee
 AutoUpdate=local
 
+[Service]
+Restart=on-failure
+
 [Install]
 WantedBy=prod.target
-

@@ -1,5 +1,5 @@
 [Unit]
-Restart=on-failure
+Wants=image-build@%N.timer
 
 [Container]
 AutoUpdate=local
@@ -7,6 +7,9 @@ Environment=TZ=Europe/Berlin
 Image=localhost/freshrss
 PublishPort=8090:80
 Volume=freshrss:/srv/FreshRSS/data
+
+[Service]
+Restart=on-failure
 
 [Install]
 WantedBy=prod.target

@@ -1,5 +1,4 @@
 [Unit]
-Restart=on-failure
 Wants=image-build@%N.timer
 
 [Container]
@@ -8,6 +7,9 @@ PublishPort=445:445
 AutoUpdate=local
 Volume=media:/srv/media
 Volume=docs-scan:/srv/scans
+
+[Service]
+Restart=on-failure
 
 [Install]
 WantedBy=prod.target
