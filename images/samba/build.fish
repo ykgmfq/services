@@ -1,11 +1,19 @@
 #!/usr/bin/fish
-if set --query $CREDENTIALS_DIRECTORY
-	source $CREDENTIALS_DIRECTORY/secrets.fish
+if set --query CREDENTIALS_DIRECTORY
+	source $CREDENTIALS_DIRECTORY/secrets
 else if not set -q argv[1]
 	echo Please provide credentials.
-	exit 1
+	exit 2
 else
 	source $argv
+	if not set --query $pwscan
+		echo Loading of credentials from commandline path failed.
+		exit 2
+	end
+end
+function abort
+    buildah rm $argv
+    exit 1
 end
 set tag (basename (pwd))
 set alpine 3
@@ -20,4 +28,4 @@ and buildah config \
     --cmd 'smbd --foreground --no-process-group' \
     $ctr
 and buildah commit --rm $ctr $tag
-or exit 1
+or abort $ctr
