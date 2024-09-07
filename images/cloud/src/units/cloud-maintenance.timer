@@ -1,0 +1,6 @@
+[Timer]
+OnCalendar=Monthly
+RandomizedDelaySec=10min
+
+[Install]
+WantedBy=default.target

@@ -1,0 +1,6 @@
+[Service]
+User=cloud
+Type=oneshot
+ExecCondition=/usr/bin/php occ status -e
+ExecStart=/usr/bin/php occ maintenance:repair --include-expensive
+WorkingDirectory=/srv/de.dm-poepperl.cloud/html
