@@ -13,7 +13,8 @@
 				"command": "systemctl",
 				"args": [
 					"daemon-reload"
-				]
+				],
+				"problemMatcher": []
 			},
 			{
 				"label": "isolate base",
@@ -23,7 +24,7 @@
 					"isolate",
 					"multi-user"
 				]
-			},
+			}
 		]
 	}
 }
