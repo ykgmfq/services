@@ -1,5 +1,5 @@
 [Container]
-Image=docker.io/collabora/code:24.04.6.2.1
+Image=docker.io/collabora/code
 PublishPort=9980:9980
 AutoUpdate=registry
 Environment=extra_params="--o:ssl.enable=false --o:ssl.termination=true"
