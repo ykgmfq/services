@@ -1,0 +1,11 @@
+[Container]
+AutoUpdate=registry
+Image=docker.io/ollama/ollama
+PublishPort=11434:11434
+Volume=ollama-models:/root/.ollama
+
+[Service]
+Restart=on-failure
+
+[Install]
+WantedBy=prod.target
