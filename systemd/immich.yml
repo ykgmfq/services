@@ -14,6 +14,8 @@ spec:
       volumeMounts:
         - mountPath: /usr/src/app/upload
           name: immich-pvc
+        - mountPath: /mnt/media/test
+          name: test-pvc
       env:
         - name: TZ
           value: Europe/Berlin
@@ -54,6 +56,9 @@ spec:
     - name: immich-pvc
       persistentVolumeClaim:
         claimName: immich
+    - name: test-pvc
+      persistentVolumeClaim:
+        claimName: test
     - name: immich-db-pvc
       persistentVolumeClaim:
         claimName: immich-db
