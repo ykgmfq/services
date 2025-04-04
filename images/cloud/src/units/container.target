@@ -1,3 +1,4 @@
 [Unit]
 Requires=php-fpm.service
 After=php-fpm.service
+Wants=cloud-ai-worker@0.service cloud-ai-worker@1.service cloud-ai-worker@2.service
