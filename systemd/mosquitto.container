@@ -1,0 +1,14 @@
+[Unit]
+Wants=image-build@%N.timer
+
+[Container]
+Image=localhost/mosquitto
+PublishPort=1883:1883
+PublishPort=8883:8883
+AutoUpdate=local
+
+[Service]
+Restart=on-failure
+
+[Install]
+WantedBy=prod.target
