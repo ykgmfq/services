@@ -5,7 +5,7 @@ function abort
 end
 set tag (basename (pwd))
 set uid 800
-set fedora 40
+set fedora 41
 echo "Base Image | $fedora"
 echo "Tag        | $tag"
 echo "User ID    | $uid"
