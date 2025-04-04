@@ -1,8 +1,0 @@
-[Unit]
-
-[Service]
-User=cloud
-Type=oneshot
-ExecCondition=/usr/bin/php occ status -e
-ExecStart=/usr/bin/php occ preview:pre-generate
-WorkingDirectory=/srv/de.dm-poepperl.cloud/html

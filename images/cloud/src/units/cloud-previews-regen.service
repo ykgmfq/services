@@ -1,7 +1,0 @@
-[Unit]
-
-[Service]
-User=cloud
-ExecCondition=/usr/bin/php occ status -e
-ExecStart=/usr/bin/php occ preview:generate-all --verbose
-WorkingDirectory=/srv/de.dm-poepperl.cloud/html
