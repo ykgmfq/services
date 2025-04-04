@@ -3,4 +3,5 @@ User=cloud
 Type=oneshot
 ExecCondition=/usr/bin/php occ status -e
 ExecStart=/usr/bin/php occ maintenance:repair --include-expensive
+ExecStart=/usr/bin/php occ db:add-missing-indices
 WorkingDirectory=/srv/de.dm-poepperl.cloud/html

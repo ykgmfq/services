@@ -1,6 +1,0 @@
-[Timer]
-OnCalendar=Sat *-*-1..7
-RandomizedDelaySec=10min
-
-[Install]
-WantedBy=default.target
