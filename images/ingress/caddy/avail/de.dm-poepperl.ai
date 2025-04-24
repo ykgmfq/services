@@ -1,0 +1,11 @@
+# Mozilla Observatory B+
+# https://observatory.mozilla.org/analyze/ai.dm-poepperl.de
+ai.dm-poepperl.de {
+  @requireAuth {
+    not header Authorization "Bearer {env.OLLAMA_API_KEY}"
+  }
+  respond @requireAuth "Unauthorized" 401
+  reverse_proxy localhost:11434
+  import stdheader
+  encode zstd gzip
+}

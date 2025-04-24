@@ -6,6 +6,7 @@ Image=localhost/ingress
 Network=host
 AutoUpdate=local
 Volume=ingress:/data
+Secret=ollama-api-key,type=env,target=OLLAMA_API_KEY
 
 [Service]
 Restart=on-failure
