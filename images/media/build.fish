@@ -4,7 +4,7 @@ function abort
     exit 1
 end
 set tag (basename (pwd))
-set alpine 3.21
+set alpine 3.22
 echo "Alpine | $alpine"
 echo "Tag    | $tag"
 set ctr (buildah from --pull docker.io/alpine:$alpine)
