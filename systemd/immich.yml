@@ -12,9 +12,9 @@ spec:
     - name: app
       image: ghcr.io/immich-app/immich-server:release
       volumeMounts:
-        - mountPath: /usr/src/app/upload
+        - mountPath: /data
           name: immich-pvc
-        - mountPath: /mnt/media/test
+        - mountPath: /mnt/test
           name: test-pvc
       env:
         - name: TZ
@@ -54,14 +54,14 @@ spec:
           name: immich-db-pvc
   volumes:
     - name: immich-pvc
-      persistentVolumeClaim:
-        claimName: immich
+      hostPath:
+        path: /mnt/persist/immich
     - name: test-pvc
-      persistentVolumeClaim:
-        claimName: test
+      hostPath:
+        path: /mnt/persist/test
     - name: immich-db-pvc
-      persistentVolumeClaim:
-        claimName: immich-db
+      hostPath:
+        path: /mnt/persist/immich/db
     - name: immich-modelcache-pvc
       persistentVolumeClaim:
         claimName: immich-modelcache

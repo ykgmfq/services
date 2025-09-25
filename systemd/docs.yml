@@ -52,6 +52,9 @@ spec:
         - mountPath: /usr/src/paperless/data
           name: docs-pvc
     - name: db
+      securityContext:
+        runAsGroup: 879
+        runAsUser: 879
       env:
         - name: POSTGRES_PASSWORD
           value: a
@@ -66,11 +69,11 @@ spec:
           name: docs-redis-pvc
   volumes:
     - name: docs-db-pvc
-      persistentVolumeClaim:
-        claimName: docs-db
+      hostPath:
+        path: /mnt/persist/docs/db
     - name: docs-pvc
-      persistentVolumeClaim:
-        claimName: docs
+      hostPath:
+        path: /mnt/persist/docs
     - name: docs-redis-pvc
       persistentVolumeClaim:
         claimName: docs-redis

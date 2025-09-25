@@ -8,9 +8,9 @@ AutoUpdate=local
 Environment=JELLYFIN_CACHE_DIR=/var/cache/jellyfin
 Environment=JELLYFIN_DATA_DIR=/var/lib/jellyfin
 Environment=JELLYFIN_LOG_DIR=/var/log/jellyfin
-Volume=media:/srv/media
+Volume=/mnt/media:/srv/media
 Volume=media-cache:/var/cache/jellyfin
-Volume=jellyfin:/var/lib/jellyfin
+Volume=/mnt/persist/jellyfin:/var/lib/jellyfin
 AddDevice=/dev/dri/:/dev/dri/
 
 [Service]

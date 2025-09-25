@@ -5,7 +5,7 @@ Wants=image-build@%N.timer
 Image=localhost/samba
 PublishPort=445:445
 AutoUpdate=local
-Volume=media:/srv/media
+Volume=/mnt/media:/srv/media
 Volume=docs-scan:/srv/scans
 
 [Service]

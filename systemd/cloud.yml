@@ -56,11 +56,11 @@ spec:
           name: cloud-redis-pvc
   volumes:
     - name: cloud-pvc
-      persistentVolumeClaim:
-        claimName: cloud
+      hostPath:
+        path: /mnt/persist/cloud
     - name: cloud-db-pvc
-      persistentVolumeClaim:
-        claimName: cloud-db
+      hostPath:
+        path: /mnt/persist/cloud/db
     - name: cloud-preview-pvc
       persistentVolumeClaim:
         claimName: cloud-preview
