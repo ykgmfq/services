@@ -49,11 +49,8 @@ spec:
           name: cloud-db-pvc
     - image: docker.io/nextcloud/aio-imaginary
       name: imaginary
-    - image: docker.io/library/redis:7-alpine
+    - image: docker.io/valkey/valkey:8-alpine
       name: redis
-      volumeMounts:
-        - mountPath: /data
-          name: cloud-redis-pvc
   volumes:
     - name: cloud-pvc
       hostPath:
@@ -64,6 +61,3 @@ spec:
     - name: cloud-preview-pvc
       persistentVolumeClaim:
         claimName: cloud-preview
-    - name: cloud-redis-pvc
-      persistentVolumeClaim:
-        claimName: cloud-redis

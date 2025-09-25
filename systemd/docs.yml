@@ -63,10 +63,7 @@ spec:
         - mountPath: /var/lib/postgresql/data
           name: docs-db-pvc
     - name: redis
-      image: docker.io/library/redis:7-alpine
-      volumeMounts:
-        - mountPath: /data
-          name: docs-redis-pvc
+      image: docker.io/valkey/valkey:8-alpine
   volumes:
     - name: docs-db-pvc
       hostPath:
@@ -74,9 +71,6 @@ spec:
     - name: docs-pvc
       hostPath:
         path: /mnt/persist/docs
-    - name: docs-redis-pvc
-      persistentVolumeClaim:
-        claimName: docs-redis
     - name: docs-thumbnails-pvc
       persistentVolumeClaim:
         claimName: docs-thumbnails

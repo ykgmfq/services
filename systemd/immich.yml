@@ -40,12 +40,9 @@ spec:
       volumes:
         - immich-modelcache-pvc:/cache
     - name: redis
-      image: docker.io/library/redis:6-alpine
-      volumeMounts:
-        - mountPath: /data
-          name: immich-redis-pvc
+      image: docker.io/valkey/valkey:8-alpine
     - name: db
-      image: docker.io/tensorchord/pgvecto-rs:pg16-v0.2.1
+      image: ghcr.io/immich-app/postgres:17-vectorchord0.4.3
       env:
         - name: POSTGRES_PASSWORD
           value: a
@@ -65,6 +62,3 @@ spec:
     - name: immich-modelcache-pvc
       persistentVolumeClaim:
         claimName: immich-modelcache
-    - name: immich-redis-pvc
-      persistentVolumeClaim:
-        claimName: immich-redis
