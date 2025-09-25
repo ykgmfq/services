@@ -6,7 +6,7 @@ function abort
 end
 set tag (basename (pwd))
 set branch 4.0
-set ws 0.74
+set ws 0.77
 set sun 2.1
 set ctr (buildah from --pull docker.io/nodered/node-red:$branch)
 and buildah run $ctr npm install node-red-contrib-{sun-position@$sun.x,home-assistant-websocket@$ws.x,timed-counter,spline-curve} passport-openidconnect
