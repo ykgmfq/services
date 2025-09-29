@@ -3,7 +3,7 @@ AutoUpdate=registry
 Environment=TZ=Europe/Berlin
 Image=ghcr.io/advplyr/audiobookshelf
 PublishPort=13378:80
-Volume=/mnt/media:/media
+Volume=/mnt/media:/media:ro
 Volume=/mnt/persist/audiobookshelf:/config
 Volume=/mnt/ephemeral/abs-metadata:/metadata
 Volume=/mnt/ephemeral/podcasts:/podcasts
