@@ -10,7 +10,7 @@ metadata:
 spec:
   containers:
     - name: app
-      image: ghcr.io/immich-app/immich-server:release
+      image: ghcr.io/immich-app/immich-server:v2
       volumeMounts:
         - mountPath: /data
           name: immich-pvc
@@ -38,13 +38,13 @@ spec:
           containerPort: 2283
           hostPort: 8089
     - name: ml
-      image: ghcr.io/immich-app/immich-machine-learning:release
+      image: ghcr.io/immich-app/immich-machine-learning:v2
       volumes:
         - immich-modelcache-pvc:/cache
     - name: redis
       image: docker.io/valkey/valkey:8-alpine
     - name: db
-      image: ghcr.io/immich-app/postgres:17-vectorchord0.4.3
+      image: ghcr.io/immich-app/postgres:17-vectorchord0.5.3
       env:
         - name: POSTGRES_PASSWORD
           value: a
