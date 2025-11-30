@@ -1,0 +1,6 @@
+# https://observatory.mozilla.org/analyze/mqtt.dm-poepperl.de
+mqtt.dm-poepperl.de {
+  reverse_proxy 127.0.0.1:1884
+  import stdheader
+  encode zstd gzip
+}

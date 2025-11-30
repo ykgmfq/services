@@ -4,8 +4,9 @@ Wants=image-build@%N.timer
 [Container]
 Image=localhost/mosquitto
 PublishPort=1883:1883
-PublishPort=8883:8883
+PublishPort=1884:1884
 AutoUpdate=local
+Secret=mosquitto_passwords,uid=1883,gid=1883,mode=0400
 
 [Service]
 Restart=on-failure
