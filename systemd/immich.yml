@@ -37,6 +37,7 @@ spec:
         - name: web
           containerPort: 2283
           hostPort: 8089
+          hostIP: 127.0.0.1
     - name: ml
       image: ghcr.io/immich-app/immich-machine-learning:v2
       volumes:

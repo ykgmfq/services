@@ -55,6 +55,7 @@ spec:
         - name: vault
           containerPort: 8087
           hostPort: 8087
+          hostIP: 127.0.0.1
       securityContext:
         runAsGroup: 844
         runAsUser: 844

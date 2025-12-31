@@ -5,7 +5,7 @@ Wants=image-build@%N.timer
 AutoUpdate=local
 Environment=TZ=Europe/Berlin
 Image=localhost/freshrss
-PublishPort=8090:80
+PublishPort=127.0.0.1:8090:80
 Volume=/mnt/persist/freshrss:/srv/FreshRSS/data
 
 [Service]

@@ -1,7 +1,7 @@
 [Container]
 AutoUpdate=registry
 Image=docker.io/ollama/ollama
-PublishPort=11434:11434
+PublishPort=127.0.0.1:11434:11434
 Volume=ollama-models:/root/.ollama
 Environment=OLLAMA_DEBUG=1
 Environment=OLLAMA_ORIGINS=*
