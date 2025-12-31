@@ -55,10 +55,10 @@ spec:
   volumes:
     - name: cloud-pvc
       hostPath:
-        path: /mnt/persist/cloud
+        path: /var/mnt/persist/cloud
     - name: cloud-db-pvc
       hostPath:
-        path: /mnt/persist/cloud/db
+        path: /var/mnt/persist/cloud/db
     - name: cloud-preview-pvc
       persistentVolumeClaim:
         claimName: cloud-preview

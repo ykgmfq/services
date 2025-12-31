@@ -9,7 +9,7 @@ Environment=TZ=Europe/Berlin
 Network=host
 #User=110
 #Group=0
-Volume=/mnt/persist/home/nodered:/data
+Volume=/var/mnt/persist/home/nodered:/data
 AutoUpdate=local
 
 [Service]

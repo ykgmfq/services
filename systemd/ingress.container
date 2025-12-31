@@ -5,8 +5,8 @@ Wants=image-build@%N.timer
 Image=localhost/ingress
 Network=host
 AutoUpdate=local
-Volume=/mnt/persist/ingress:/data
-Secret=ollama-api-key,type=env,target=OLLAMA_API_KEY
+Volume=/var/mnt/persist/ingress:/data
+Secret=ollama_api_key,type=env,target=OLLAMA_API_KEY
 
 [Service]
 Restart=on-failure

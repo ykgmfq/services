@@ -74,7 +74,7 @@ spec:
   volumes:
     - name: vault-pvc
       hostPath:
-        path: /mnt/persist/vault
+        path: /var/mnt/persist/vault
     - name: vault-db-pvc
       hostPath:
-        path: /mnt/persist/vault/db
+        path: /var/mnt/persist/vault/db

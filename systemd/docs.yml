@@ -68,10 +68,10 @@ spec:
   volumes:
     - name: docs-db-pvc
       hostPath:
-        path: /mnt/persist/docs/db
+        path: /var/mnt/persist/docs/db
     - name: docs-pvc
       hostPath:
-        path: /mnt/persist/docs
+        path: /var/mnt/persist/docs
     - name: docs-thumbnails-pvc
       persistentVolumeClaim:
         claimName: docs-thumbnails

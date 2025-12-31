@@ -22,7 +22,7 @@ echo Branch: $branch
 set ctr (buildah from --pull $url:$branch)
 and buildah add $ctr install.sh /tmp/install.sh
 and buildah run $ctr bash /tmp/install.sh $PAPERLESS_LOGGING_DIR $PAPERLESS_PRE_CONSUME_SCRIPT
-and buildah add $ctr passwords.txt /usr/src/paperless/scripts/passwords.txt
+and buildah add $ctr /var/mnt/persist/pdf_passwords.txt /usr/src/paperless/scripts/passwords.txt
 for e in USERMAP_{G,U}ID PAPERLESS_LOGGING_DIR PAPERLESS_PRE_CONSUME_SCRIPT
     and buildah config --env=$e $ctr
 end

@@ -9,7 +9,7 @@ set fedora 43
 echo "Base Image | $fedora"
 echo "Tag        | $tag"
 echo "User ID    | $uid"
-wget --quiet -O /srv/FreshRSS.tar.gz (curl -s https://api.github.com/repos/FreshRSS/FreshRSS/releases/latest | jq -r ".tarball_url")
+curl -sL (curl -s https://api.github.com/repos/FreshRSS/FreshRSS/releases/latest | jq -r '.tarball_url') -o /srv/FreshRSS.tar.gz
 and set ctr (buildah from --pull quay.io/fedora/fedora-minimal:$fedora)
 and buildah add $ctr /srv/FreshRSS.tar.gz /srv/
 and buildah copy $ctr ./src tmp
