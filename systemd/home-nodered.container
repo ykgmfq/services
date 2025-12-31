@@ -1,6 +1,6 @@
 [Unit]
-Wants=image-build@%N.timer
-After=home.service
+Wants=image-bootstrap@%N.service image-build@%N.timer
+After=image-bootstrap@%N.service home.service
 
 [Container]
 Image=localhost/nodered

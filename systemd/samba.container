@@ -1,5 +1,6 @@
 [Unit]
-Wants=image-build@%N.timer
+Wants=image-bootstrap@%N.service image-build@%N.timer
+After=image-bootstrap@%N.service
 
 [Container]
 Image=localhost/samba
