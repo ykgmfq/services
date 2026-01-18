@@ -4,14 +4,17 @@ After=dev-conbee.device network-online.target
 Wants=home-upgrade.timer
 
 [Container]
-Image=localhost/home-assistant
+Image=ghcr.io/home-assistant/home-assistant
 Network=host
 Volume=/var/mnt/persist/home:/config
 AddDevice=/dev/serial/by-id/usb-dresden_elektronik_ingenieurtechnik_GmbH_ConBee_II_DE2130827-if00:/dev/conbee
-AutoUpdate=local
+AutoUpdate=registry
+HealthCmd=curl --fail --silent --show-error localhost:8123 || exit 1
+HealthOnFailure=kill
 
 [Service]
 Restart=on-failure
+RestartSec=5min
 
 [Install]
 WantedBy=prod.target
