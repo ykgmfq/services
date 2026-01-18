@@ -1,5 +1,3 @@
-[Unit]
-
 [Service]
 User=cloud
 Type=oneshot
@@ -7,3 +5,4 @@ KillMode=process
 ExecCondition=/usr/bin/php occ status -e
 ExecStart=/usr/bin/php cron.php
 WorkingDirectory=/srv/de.dm-poepperl.cloud/html
+Slice=cloud-maint.slice

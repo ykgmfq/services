@@ -1,5 +1,3 @@
-[Unit]
-
 [Timer]
 OnCalendar=04:00
 Persistent=True
