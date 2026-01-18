@@ -38,10 +38,20 @@ spec:
           containerPort: 2283
           hostPort: 8089
           hostIP: 127.0.0.1
+      livenessProbe:
+        httpGet:
+          path: /health
+          port: 2283
     - name: ml
       image: ghcr.io/immich-app/immich-machine-learning:v2
       volumes:
         - immich-modelcache-pvc:/cache
+      livenessProbe:
+        exec:
+          command:
+            - python3
+            - -c
+            - "import sys, urllib.request; sys.exit(0 if urllib.request.urlopen('http://localhost:3003').getcode() == 200 else 1)"
     - name: redis
       image: docker.io/valkey/valkey:9-alpine
       livenessProbe:

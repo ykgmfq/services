@@ -6,6 +6,8 @@ After=image-bootstrap@%N.service
 Image=localhost/avahi
 Network=host
 AutoUpdate=local
+HealthCmd=avahi-daemon --check
+HealthOnFailure=kill
 
 [Service]
 Restart=on-failure

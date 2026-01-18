@@ -62,6 +62,10 @@ spec:
       volumeMounts:
         - mountPath: /data
           name: vault-pvc
+      livenessProbe:
+        exec:
+          command:
+            - /healthcheck.sh
     - name: db
       image: docker.io/library/postgres:15-alpine
       env:

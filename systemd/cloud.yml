@@ -26,6 +26,10 @@ spec:
         - mountPath: /srv/de.dm-poepperl.cloud/data/appdata_och5khtk0i0u/preview
           name: cloud-preview-pvc
           readOnly: true
+      livenessProbe:
+        httpGet:
+          path: /alive
+          port: 80
     - image: localhost/cloud:latest
       name: app
       volumeMounts:
@@ -36,8 +40,8 @@ spec:
       livenessProbe:
         exec:
           command:
-          - /usr/bin/bash
-          - /usr/local/bin/alive.sh
+            - /usr/bin/bash
+            - /usr/local/bin/alive.sh
         initialDelaySeconds: 10
         periodSeconds: 60
     - image: docker.io/library/postgres:15-alpine
@@ -56,6 +60,13 @@ spec:
             - postgres
     - image: docker.io/nextcloud/aio-imaginary
       name: imaginary
+      livenessProbe:
+        exec:
+          command:
+            - wget
+            - -q
+            - --spider
+            - localhost:9000/health
     - image: docker.io/valkey/valkey:8-alpine
       name: redis
       livenessProbe:
