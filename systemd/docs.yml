@@ -59,6 +59,12 @@ spec:
       env:
         - name: POSTGRES_PASSWORD
           value: a
+      livenessProbe:
+        exec:
+          command:
+            - pg_isready
+            - -U
+            - postgres
       image: docker.io/library/postgres:15-alpine
       volumeMounts:
         - mountPath: /var/lib/postgresql/data

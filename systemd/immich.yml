@@ -57,6 +57,12 @@ spec:
       volumeMounts:
         - mountPath: /var/lib/postgresql/data
           name: immich-db-pvc
+      livenessProbe:
+        exec:
+          command:
+            - pg_isready
+            - -U
+            - postgres
   volumes:
     - name: immich-pvc
       hostPath:

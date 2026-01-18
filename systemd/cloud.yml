@@ -48,6 +48,12 @@ spec:
       volumeMounts:
         - mountPath: /var/lib/postgresql/data
           name: cloud-db-pvc
+      livenessProbe:
+        exec:
+          command:
+            - pg_isready
+            - -U
+            - postgres
     - image: docker.io/nextcloud/aio-imaginary
       name: imaginary
     - image: docker.io/valkey/valkey:8-alpine

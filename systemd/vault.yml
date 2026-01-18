@@ -70,6 +70,12 @@ spec:
       volumeMounts:
         - mountPath: /var/lib/postgresql/data
           name: vault-db-pvc
+      livenessProbe:
+        exec:
+          command:
+            - pg_isready
+            - -U
+            - postgres
   enableServiceLinks: false
   volumes:
     - name: vault-pvc
