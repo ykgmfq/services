@@ -52,6 +52,11 @@ spec:
       name: imaginary
     - image: docker.io/valkey/valkey:8-alpine
       name: redis
+      livenessProbe:
+        exec:
+          command:
+            - redis-cli
+            - ping
   volumes:
     - name: cloud-pvc
       hostPath:

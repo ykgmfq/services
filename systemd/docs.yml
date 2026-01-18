@@ -65,6 +65,11 @@ spec:
           name: docs-db-pvc
     - name: redis
       image: docker.io/valkey/valkey:8-alpine
+      livenessProbe:
+        exec:
+          command:
+            - redis-cli
+            - ping
   volumes:
     - name: docs-db-pvc
       hostPath:

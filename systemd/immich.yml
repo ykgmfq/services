@@ -44,6 +44,11 @@ spec:
         - immich-modelcache-pvc:/cache
     - name: redis
       image: docker.io/valkey/valkey:9-alpine
+      livenessProbe:
+        exec:
+          command:
+            - redis-cli
+            - ping
     - name: db
       image: ghcr.io/immich-app/postgres:17-vectorchord0.5.3
       env:
