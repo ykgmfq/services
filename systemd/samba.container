@@ -8,6 +8,8 @@ PublishPort=445:445
 AutoUpdate=local
 Volume=/var/mnt/media:/srv/media
 Volume=docs-scan:/srv/scans
+HealthCmd=sh /opt/monitor/alive.sh
+HealthOnFailure=kill
 
 [Service]
 Restart=on-failure

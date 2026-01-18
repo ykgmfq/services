@@ -7,4 +7,3 @@ apk add --no-cache samba
 (echo $pwscan; sleep 1; echo $pwscan ) | smbpasswd -s -a scan
 (echo monitor; sleep 1; echo monitor ) | smbpasswd -s -a monitor
 mkdir /opt/monitor
-echo "OK" > /opt/monitor/m.txt
