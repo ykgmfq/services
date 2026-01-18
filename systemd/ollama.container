@@ -3,11 +3,15 @@ AutoUpdate=registry
 Image=docker.io/ollama/ollama
 PublishPort=127.0.0.1:11434:11434
 Volume=ollama-models:/root/.ollama
-Environment=OLLAMA_DEBUG=1
+# Environment=OLLAMA_DEBUG=1
 Environment=OLLAMA_ORIGINS=*
+HealthCmd=ollama list || exit 1
+HealthOnFailure=kill
 
 [Service]
 Restart=on-failure
+MemoryHigh=20G
+MemoryMax=24G
 
 [Install]
 WantedBy=prod.target
