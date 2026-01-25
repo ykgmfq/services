@@ -3,6 +3,7 @@ Yaml=/etc/containers/systemd/immich.yml
 
 [Service]
 Restart=on-failure
+Slice=prod-tier1.slice
 
 [Install]
 WantedBy=prod.target

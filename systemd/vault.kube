@@ -3,6 +3,7 @@ Yaml=/etc/containers/systemd/vault.yml
 
 [Service]
 Restart=on-failure
+Slice=prod-tier0.slice
 
 [Install]
 WantedBy=prod.target

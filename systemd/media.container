@@ -19,6 +19,7 @@ HealthInterval=5m
 
 [Service]
 Restart=on-failure
+Slice=prod-tier1.slice
 
 [Install]
 WantedBy=prod.target

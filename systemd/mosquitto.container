@@ -13,6 +13,7 @@ HealthOnFailure=kill
 
 [Service]
 Restart=on-failure
+Slice=prod-tier0.slice
 
 [Install]
 WantedBy=prod.target

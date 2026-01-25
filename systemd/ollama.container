@@ -13,6 +13,7 @@ HealthInterval=5m
 Restart=on-failure
 MemoryHigh=20G
 MemoryMax=24G
+Slice=prod-tier1.slice
 
 [Install]
 WantedBy=prod.target

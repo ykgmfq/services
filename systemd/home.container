@@ -14,6 +14,7 @@ HealthOnFailure=kill
 [Service]
 Restart=on-failure
 RestartSec=5min
+Slice=prod-tier0.slice
 
 [Install]
 WantedBy=prod.target

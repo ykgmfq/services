@@ -11,6 +11,7 @@ Volume=docs-scan:/srv/scans
 HealthCmd=sh /opt/monitor/alive.sh
 HealthOnFailure=kill
 HealthInterval=5m
+Slice=prod-tier0.slice
 
 [Service]
 Restart=on-failure
