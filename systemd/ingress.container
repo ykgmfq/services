@@ -10,6 +10,7 @@ Volume=/var/mnt/persist/ingress:/data
 Secret=ollama_api_key,type=env,target=OLLAMA_API_KEY
 HealthCmd=curl --fail --silent --show-error localhost || exit 1
 HealthOnFailure=kill
+HealthInterval=5m
 
 [Service]
 Restart=on-failure

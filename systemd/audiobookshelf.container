@@ -9,6 +9,7 @@ Volume=/var/mnt/ephemeral/abs-metadata:/metadata
 Volume=/var/mnt/ephemeral/podcasts:/podcasts
 HealthCmd=wget -q --spider localhost/audiobookshelf/ || exit 1
 HealthOnFailure=kill
+HealthInterval=5m
 
 [Service]
 Restart=on-failure

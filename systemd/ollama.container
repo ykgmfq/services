@@ -7,6 +7,7 @@ Volume=ollama-models:/root/.ollama
 Environment=OLLAMA_ORIGINS=*
 HealthCmd=ollama list || exit 1
 HealthOnFailure=kill
+HealthInterval=5m
 
 [Service]
 Restart=on-failure

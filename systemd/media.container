@@ -15,6 +15,7 @@ Volume=media-cache:/var/cache/jellyfin
 Volume=/var/mnt/persist/jellyfin:/var/lib/jellyfin
 HealthCmd=curl --fail --silent --show-error localhost:8096/health || exit 1
 HealthOnFailure=kill
+HealthInterval=5m
 
 [Service]
 Restart=on-failure

@@ -42,6 +42,7 @@ spec:
         httpGet:
           path: /health
           port: 2283
+        periodSeconds: 300
     - name: ml
       image: ghcr.io/immich-app/immich-machine-learning:v2
       volumes:
@@ -51,7 +52,8 @@ spec:
           command:
             - python3
             - -c
-            - "import sys, urllib.request; sys.exit(0 if urllib.request.urlopen('http://localhost:3003').getcode() == 200 else 1)"
+            - "import urllib.request; urllib.request.urlopen('http://localhost:3003')"
+        periodSeconds: 300
     - name: redis
       image: docker.io/valkey/valkey:9-alpine
       livenessProbe:
@@ -59,6 +61,7 @@ spec:
           command:
             - redis-cli
             - ping
+        periodSeconds: 300
     - name: db
       image: ghcr.io/immich-app/postgres:17-vectorchord0.5.3
       env:
@@ -73,6 +76,7 @@ spec:
             - pg_isready
             - -U
             - postgres
+        periodSeconds: 300
   volumes:
     - name: immich-pvc
       hostPath:

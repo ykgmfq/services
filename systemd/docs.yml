@@ -20,8 +20,7 @@ spec:
       livenessProbe:
         httpGet:
           port: 8000
-        initialDelaySeconds: 60
-        periodSeconds: 60
+        periodSeconds: 300
       env:
         - name: PAPERLESS_URL
           value: https://docs.dm-poepperl.de
@@ -65,6 +64,7 @@ spec:
             - pg_isready
             - -U
             - postgres
+        periodSeconds: 300
       image: docker.io/library/postgres:15-alpine
       volumeMounts:
         - mountPath: /var/lib/postgresql/data
@@ -76,6 +76,7 @@ spec:
           command:
             - redis-cli
             - ping
+        periodSeconds: 300
   volumes:
     - name: docs-db-pvc
       hostPath:

@@ -30,6 +30,7 @@ spec:
         httpGet:
           path: /alive
           port: 80
+        periodSeconds: 300
     - image: localhost/cloud:latest
       name: app
       volumeMounts:
@@ -42,8 +43,7 @@ spec:
           command:
             - /usr/bin/bash
             - /usr/local/bin/alive.sh
-        initialDelaySeconds: 10
-        periodSeconds: 60
+        periodSeconds: 300
     - image: docker.io/library/postgres:15-alpine
       name: db
       env:
@@ -58,6 +58,7 @@ spec:
             - pg_isready
             - -U
             - postgres
+        periodSeconds: 300
     - image: docker.io/nextcloud/aio-imaginary
       name: imaginary
       livenessProbe:
@@ -67,6 +68,7 @@ spec:
             - -q
             - --spider
             - localhost:9000/health
+        periodSeconds: 300
     - image: docker.io/valkey/valkey:8-alpine
       name: redis
       livenessProbe:
@@ -74,6 +76,7 @@ spec:
           command:
             - redis-cli
             - ping
+        periodSeconds: 300
   volumes:
     - name: cloud-pvc
       hostPath:

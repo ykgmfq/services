@@ -8,6 +8,7 @@ Network=host
 AutoUpdate=local
 HealthCmd=avahi-daemon --check
 HealthOnFailure=kill
+HealthInterval=5m
 
 [Service]
 Restart=on-failure

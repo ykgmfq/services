@@ -10,6 +10,7 @@ PublishPort=127.0.0.1:8090:80
 Volume=/var/mnt/persist/freshrss:/srv/FreshRSS/data
 HealthCmd=curl --fail --silent --show-error localhost/alive || exit 1
 HealthOnFailure=kill
+HealthInterval=5m
 
 [Service]
 Restart=on-failure

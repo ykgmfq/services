@@ -66,6 +66,7 @@ spec:
         exec:
           command:
             - /healthcheck.sh
+        periodSeconds: 300
     - name: db
       image: docker.io/library/postgres:15-alpine
       env:
@@ -80,6 +81,7 @@ spec:
             - pg_isready
             - -U
             - postgres
+        periodSeconds: 300
   enableServiceLinks: false
   volumes:
     - name: vault-pvc

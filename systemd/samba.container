@@ -10,6 +10,7 @@ Volume=/var/mnt/media:/srv/media
 Volume=docs-scan:/srv/scans
 HealthCmd=sh /opt/monitor/alive.sh
 HealthOnFailure=kill
+HealthInterval=5m
 
 [Service]
 Restart=on-failure

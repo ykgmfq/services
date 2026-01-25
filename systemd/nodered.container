@@ -13,6 +13,7 @@ Volume=/var/mnt/persist/home/nodered:/data
 AutoUpdate=local
 HealthCmd=curl --fail --silent --show-error localhost:1880 || exit 1
 HealthOnFailure=kill
+HealthInterval=5m
 
 [Service]
 Restart=on-failure
