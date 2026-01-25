@@ -1,7 +1,6 @@
 [Unit]
 #BindsTo=dev-conbee.device
 After=dev-conbee.device network-online.target
-Wants=home-upgrade.timer
 
 [Container]
 Image=ghcr.io/home-assistant/home-assistant
