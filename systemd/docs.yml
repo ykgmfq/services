@@ -34,6 +34,8 @@ spec:
           value: docs
         - name: PAPERLESS_DBHOST
           value: localhost
+        - name: PAPERLESS_DBENGINE
+          value: postgresql
         - name: PAPERLESS_OCR_LANGUAGE
           value: deu+eng
         - name: PAPERLESS_OCR_CLEAN
@@ -44,6 +46,11 @@ spec:
           value: /usr/src/paperless/data
         - name: PAPERLESS_MEDIA_ROOT
           value: /usr/src/paperless/data/media
+        - name: PAPERLESS_SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              name: docs_key
+              key: key
       volumeMounts:
         - mountPath: /usr/src/paperless/consume
           name: docs-scan-pvc
@@ -65,9 +72,9 @@ spec:
             - -U
             - postgres
         periodSeconds: 300
-      image: docker.io/library/postgres:15-alpine
+      image: docker.io/library/postgres:18-alpine
       volumeMounts:
-        - mountPath: /var/lib/postgresql/data
+        - mountPath: /var/lib/postgresql
           name: docs-db-pvc
     - name: redis
       image: docker.io/valkey/valkey:8-alpine
