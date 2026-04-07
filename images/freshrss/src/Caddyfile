@@ -10,6 +10,6 @@
 :80 {
 	root * /srv/FreshRSS/p
 	file_server
-	php_fastcgi localhost:8000
+	php_fastcgi unix//run/php-fpm/freshrss.sock
 	respond /alive "File server is alive!"
 }
