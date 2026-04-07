@@ -17,8 +17,6 @@ spec:
       ports:
         - name: web
           containerPort: 80
-          hostPort: 8088
-          hostIP: 127.0.0.1
       volumeMounts:
         - mountPath: /srv/de.dm-poepperl.cloud
           name: cloud-pvc

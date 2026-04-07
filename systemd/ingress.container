@@ -4,7 +4,17 @@ After=image-bootstrap@%N.service
 
 [Container]
 Image=localhost/ingress
-Network=host
+PublishPort=443:443
+PublishPort=80:80
+Network=cloud.network
+Network=docs.network
+Network=immich.network
+Network=vault.network
+Network=freshrss.network
+Network=media.network
+Network=ollama.network
+Network=audiobookshelf.network
+Network=mosquitto.network
 AutoUpdate=local
 Volume=/var/mnt/persist/ingress:/data
 Secret=ollama_api_key,type=env,target=OLLAMA_API_KEY

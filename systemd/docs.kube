@@ -4,6 +4,7 @@ After=image-bootstrap@%N.service
 
 [Kube]
 Yaml=/etc/containers/systemd/docs.yml
+Network=docs.network
 
 [Service]
 Restart=on-failure

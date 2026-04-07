@@ -15,7 +15,7 @@ File naming: reversed domain — e.g. `de.dm-poepperl.cloud` for `cloud.dm-poepp
 # Mozilla Observatory score
 # https://observatory.mozilla.org/analyze/<subdomain>.dm-poepperl.de
 <subdomain>.dm-poepperl.de {
-  reverse_proxy localhost:<hostPort>
+  reverse_proxy <container-dns>:<containerPort>
   import stdheader
   encode zstd gzip
 }
@@ -24,8 +24,20 @@ File naming: reversed domain — e.g. `de.dm-poepperl.cloud` for `cloud.dm-poepp
 Rules:
 - Always `import stdheader` (HSTS, X-Frame-Options, CSP, etc.)
 - Always `encode zstd gzip`
-- `reverse_proxy` points to `localhost:<hostPort>` matching the container's hostPort
+- `reverse_proxy` points to the container DNS name and internal port — not localhost
 - Comment with Mozilla Observatory URL at top
+
+## Reverse Proxy Targets
+
+Caddy runs on per-service Podman networks (not host networking). Backend targets depend on the service type:
+
+| Service type | `reverse_proxy` target | Example |
+|---|---|---|
+| .container on custom network | `<containerName>:<port>` | `vault:8087` |
+| .kube pod on custom network | `<pod-name>:<containerPort>` | `cloud-pod:80` |
+| Host-networked service | `host.containers.internal:<port>` | `host.containers.internal:8123` |
+
+Never use `localhost:<port>` — Caddy is not on the host network.
 
 ## Header Snippets (defined in Caddyfile)
 

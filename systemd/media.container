@@ -4,7 +4,8 @@ After=image-bootstrap@%N.service
 
 [Container]
 Image=localhost/media
-PublishPort=127.0.0.1:8096:8096
+ContainerName=media
+Network=media.network
 AutoUpdate=local
 Environment=JELLYFIN_CACHE_DIR=/var/cache/jellyfin
 Environment=JELLYFIN_DATA_DIR=/var/lib/jellyfin

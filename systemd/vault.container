@@ -1,8 +1,9 @@
 [Container]
 Image=ghcr.io/dani-garcia/vaultwarden:alpine
 AutoUpdate=registry
+ContainerName=vault
+Network=vault.network
 UserNS=keep-id:uid=844,gid=844
-PublishPort=127.0.0.1:8087:8087
 Volume=/var/mnt/persist/vault:/data
 Secret=cloud_smtp,type=env,target=SMTP_PASSWORD
 Environment=TZ=Europe/Berlin

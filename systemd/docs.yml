@@ -15,8 +15,6 @@ spec:
       image: localhost/docs:latest
       ports:
         - containerPort: 8000
-          hostPort: 8000
-          hostIP: 127.0.0.1
       livenessProbe:
         httpGet:
           port: 8000

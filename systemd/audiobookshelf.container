@@ -2,7 +2,8 @@
 AutoUpdate=registry
 Environment=TZ=Europe/Berlin
 Image=ghcr.io/advplyr/audiobookshelf
-PublishPort=127.0.0.1:13378:80
+ContainerName=audiobookshelf
+Network=audiobookshelf.network
 Volume=/var/mnt/media:/media:ro
 Volume=/var/mnt/persist/audiobookshelf:/config
 Volume=/var/mnt/ephemeral/abs-metadata:/metadata

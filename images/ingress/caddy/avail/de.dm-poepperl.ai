@@ -5,7 +5,7 @@ ai.dm-poepperl.de {
     not header Authorization "Bearer {env.OLLAMA_API_KEY}"
   }
   respond @requireAuth "Unauthorized" 401
-  reverse_proxy localhost:11434
+  reverse_proxy ollama:11434
   import stdheader
   encode zstd gzip
 }

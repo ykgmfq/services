@@ -13,6 +13,8 @@ After=image-bootstrap@%N.service
 
 [Container]
 Image=localhost/<service>
+ContainerName=<service>
+Network=<service>.network
 AutoUpdate=local
 HealthCmd=<check command>
 HealthOnFailure=kill
@@ -28,6 +30,8 @@ WantedBy=prod.target
 Required elements:
 - `Wants` + `After` for image-bootstrap
 - `image-build@%N.timer` in Wants for auto-rebuild
+- `ContainerName=<service>` — explicit name for DNS resolution on the network
+- `Network=<service>.network` — per-service Podman network (see Networking below)
 - `AutoUpdate=local` for locally-built images, `AutoUpdate=registry` for upstream
 - A health check (`HealthCmd` or liveness probe) — every service must have one
 - `HealthOnFailure=kill` for auto-restart
@@ -44,6 +48,7 @@ After=image-bootstrap@%N.service
 
 [Kube]
 Yaml=/etc/containers/systemd/<service>.yml
+Network=<service>.network
 
 [Service]
 Restart=on-failure
@@ -58,14 +63,54 @@ The `.yml` is a Kubernetes Pod v1 spec:
 - Each container gets a `livenessProbe` (HTTP, exec, or TCP)
 - `periodSeconds: 300` for probes (5 min default)
 - Containers in a pod share network — use `localhost:<port>` between siblings
-- `hostPort` + `hostIP: 127.0.0.1` for ports exposed to the host (Caddy connects here)
+- Only `containerPort` needed — no `hostPort`/`hostIP` (Caddy reaches pods via the shared network using the pod name as DNS)
 - `hostPath` volumes for persistent data under `/var/mnt/persist/<service>/`
 - `persistentVolumeClaim` for ephemeral managed volumes
 
+## Networking
+
+Each web-facing service has a dedicated Podman network (`<service>.network` quadlet file).
+Caddy (ingress) joins every service network to reach backends by DNS name.
+
+### .network Files
+
+Minimal — one per service in `systemd/`:
+```ini
+[Network]
+```
+Podman auto-assigns subnets. Aardvark-dns provides container DNS resolution.
+
+### How Caddy reaches services
+
+| Service type | Network | Caddy `reverse_proxy` target |
+|---|---|---|
+| .container with network | `<service>.network` | `<containerName>:<containerPort>` |
+| .kube pod with network | `<service>.network` | `<pod-metadata-name>:<containerPort>` |
+| Host-networked (.container with `Network=host`) | none | `host.containers.internal:<port>` |
+
+### Ingress container
+
+Caddy publishes ports 80 and 443, and joins all service networks:
+```ini
+[Container]
+PublishPort=443:443
+PublishPort=80:80
+Network=cloud.network
+Network=docs.network
+# ... one Network= line per service
+```
+
+### Exceptions
+
+- **Home Assistant, Node-RED, Avahi** — `Network=host` (need host device access / mDNS). Caddy reaches them via `host.containers.internal:<port>`.
+- **Samba** — `PublishPort=445:445` on all interfaces (SMB, not proxied by Caddy).
+- **Mosquitto** — joins `mosquitto.network` for Caddy WebSocket proxy, plus `PublishPort=127.0.0.1:1883:1883` so host-networked services (Home/NodeRED) can reach MQTT via localhost.
+
 ## Port Binding
 
-- Bind to `127.0.0.1` only — Caddy handles external traffic
-- Exception: samba (port 445) binds to all interfaces
+- Services on custom networks do not publish ports — Caddy reaches them via the network
+- Host-networked services bind on all interfaces (managed by the application)
+- Exception: samba (port 445) and mosquitto (loopback 1883/1884) still use `PublishPort`
 
 ## Secrets
 

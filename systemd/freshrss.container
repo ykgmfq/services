@@ -6,7 +6,8 @@ After=image-bootstrap@%N.service
 AutoUpdate=local
 Environment=TZ=Europe/Berlin
 Image=localhost/freshrss
-PublishPort=127.0.0.1:8090:80
+ContainerName=freshrss
+Network=freshrss.network
 Volume=/var/mnt/persist/freshrss:/srv/FreshRSS/data
 HealthCmd=curl --fail --silent --show-error localhost/alive || exit 1
 HealthOnFailure=kill
