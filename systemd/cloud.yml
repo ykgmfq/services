@@ -83,5 +83,5 @@ spec:
       hostPath:
         path: /var/mnt/persist/cloud/db
     - name: cloud-preview-pvc
-      persistentVolumeClaim:
-        claimName: cloud-preview
+      hostPath:
+        path: /var/mnt/ephemeral/cloud-preview
