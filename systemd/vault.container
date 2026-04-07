@@ -5,6 +5,7 @@ ContainerName=vault
 Network=vault.network
 UserNS=keep-id:uid=844,gid=844
 Volume=/var/mnt/persist/vault:/data
+Volume=/var/mnt/ephemeral/vault-icons:/var/icons
 Secret=cloud_smtp,type=env,target=SMTP_PASSWORD
 Environment=TZ=Europe/Berlin
 Environment=ICON_CACHE_FOLDER=/var/icons
