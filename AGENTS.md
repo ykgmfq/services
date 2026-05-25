@@ -77,6 +77,7 @@ Vaultwarden uses SQLite at `/var/mnt/persist/vault/db.sqlite3`. Migration from P
 | Home | home.container | upstream | Home Assistant |
 | Audiobookshelf | audiobookshelf.container | upstream (Nix) | Audiobooks/podcasts |
 | Avahi | avahi.container | avahi | mDNS discovery |
+| Forgejo | forgejo.container | upstream | Git service, SQLite |
 
 ## Conventions
 

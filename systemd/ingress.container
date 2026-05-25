@@ -15,6 +15,7 @@ Network=media.network
 Network=ollama.network
 Network=audiobookshelf.network
 Network=mosquitto.network
+Network=forgejo.network
 AutoUpdate=local
 Volume=/var/mnt/persist/ingress:/data
 Secret=ollama_api_key_plain,type=env,target=OLLAMA_API_KEY

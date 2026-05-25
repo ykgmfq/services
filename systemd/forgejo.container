@@ -1,0 +1,20 @@
+[Container]
+AutoUpdate=registry
+Image=codeberg.org/forgejo/forgejo:15
+ContainerName=forgejo
+Network=forgejo.network
+Environment=TZ=Europe/Berlin
+Environment=FORGEJO__server__DOMAIN=git.dm-poepperl.de
+Environment=FORGEJO__server__ROOT_URL=https://git.dm-poepperl.de
+Environment=FORGEJO__server__DISABLE_SSH=true
+Volume=/var/mnt/persist/forgejo:/data
+HealthCmd=wget -q --spider http://localhost:3000/api/healthz || exit 1
+HealthOnFailure=kill
+HealthInterval=5m
+
+[Service]
+Restart=on-failure
+Slice=prod-tier0.slice
+
+[Install]
+WantedBy=prod.target
