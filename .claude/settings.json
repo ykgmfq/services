@@ -1,0 +1,32 @@
+{
+  "permissions": {
+    "deny": [
+      "Bash(git push *)",
+      "Bash(git push)",
+      "Bash(git commit *)",
+      "Bash(git commit)"
+    ],
+    "allow": [
+      "Bash(podman ps *)",
+      "Bash(podman ps)",
+      "Bash(podman images *)",
+      "Bash(podman images)",
+      "Bash(podman container ls *)",
+      "Bash(podman container list *)",
+      "Bash(podman pod ls *)",
+      "Bash(podman pod list *)",
+      "Bash(podman volume ls *)",
+      "Bash(podman volume list *)",
+      "Bash(podman network ls *)",
+      "Bash(podman network list *)",
+      "Bash(systemctl status *)",
+      "Bash(systemctl status)",
+      "Bash(systemctl restart *)",
+      "Bash(systemctl restart)",
+      "Bash(journalctl *)",
+      "Bash(journalctl)",
+      "Bash(findmnt *)",
+      "Bash(zfs get *)"
+    ]
+  }
+}

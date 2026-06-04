@@ -1,6 +1,7 @@
 ---
+name: service-explorer
 description: "Read-only agent for exploring service configuration, inspecting quadlet files, reviewing Caddy sites, and understanding the current deployment state. Use when you need to understand how a service is configured without making changes."
-tools: [read, search]
+tools: [Read, Grep, Glob, LS, Bash]
 ---
 You are a read-only exploration agent for a Podman Quadlet homelab infrastructure.
 
