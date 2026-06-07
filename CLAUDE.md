@@ -10,7 +10,7 @@ Homelab infrastructure project managing containerized services on a single host 
 - **Reverse proxy**: Caddy (ingress service, host networking)
 - **Databases**: PostgreSQL (pods), SQLite (vault)
 - **Storage**: ZFS (`data/persist/*`, `data/media`)
-- **Sync**: `rclone sync systemd /etc/containers/systemd` then `systemctl daemon-reload`
+- **Sync**: `fish sync.fish` — rclone into confext at `/var/lib/confexts/services/`, `systemd-confext refresh`, podman generator dry-run, `daemon-reload`
 
 ## Directory Layout
 
@@ -19,7 +19,7 @@ images/<service>/          Build context — each has a build.fish
   build.fish               Buildah recipe (fish shell)
   src/                     Files copied into image (install.sh, Caddyfile, configs)
     units/                 Systemd units that run inside the container
-systemd/                   Quadlet files deployed to /etc/containers/systemd/
+systemd/                   Quadlet files deployed via confext to /etc/containers/systemd/
   *.container              Single-container quadlets
   *.kube + *.yml           Multi-container pod quadlets (Kubernetes Pod v1 YAML)
 ```
@@ -36,10 +36,9 @@ systemd/                   Quadlet files deployed to /etc/containers/systemd/
 ## Sync & Deploy Workflow
 
 ```fish
-fish sync.fish              # rclone sync systemd/ → /etc/containers/systemd/, validates with podman generator dry-run, daemon-reload
-systemctl daemon-reload     # already done by sync.fish
-systemctl isolate multi-user  # stop all prod services cleanly
-systemctl start prod.target   # start all prod services with new config
+fish sync.fish               # sync quadlets into confext, refresh, validate, daemon-reload
+systemctl isolate multi-user # stop all prod services cleanly
+systemctl start prod.target  # start all prod services with new config
 ```
 
 Or use VS Code tasks: "build <service>", "restart <service>", "sync services", "daemon", "start target".
