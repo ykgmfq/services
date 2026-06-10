@@ -10,7 +10,7 @@ Homelab infrastructure project managing containerized services on a single host 
 - **Reverse proxy**: Caddy (ingress service, host networking)
 - **Databases**: PostgreSQL (pods), SQLite (vault)
 - **Storage**: ZFS (`data/persist/*`, `data/media`)
-- **Sync**: `rclone sync systemd /etc/containers/systemd` then `systemctl daemon-reload`
+- **Sync**: `fish sync.fish` — rclone `systemd/` → `/etc/containers/systemd/`, podman generator dry-run, `daemon-reload`
 
 ## Directory Layout
 
@@ -36,10 +36,9 @@ systemd/                   Quadlet files deployed to /etc/containers/systemd/
 ## Sync & Deploy Workflow
 
 ```fish
-fish sync.fish              # rclone sync systemd/ → /etc/containers/systemd/, validates with podman generator dry-run, daemon-reload
-systemctl daemon-reload     # already done by sync.fish
-systemctl isolate multi-user  # stop all prod services cleanly
-systemctl start prod.target   # start all prod services with new config
+fish sync.fish               # rclone systemd/ → /etc/containers/systemd/, validate, daemon-reload
+systemctl isolate multi-user # stop all prod services cleanly
+systemctl start prod.target  # start all prod services with new config
 ```
 
 Or use VS Code tasks: "build <service>", "restart <service>", "sync services", "daemon", "start target".

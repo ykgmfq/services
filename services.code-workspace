@@ -2,11 +2,27 @@
 	"folders": [
 		{
 			"path": "."
+		},
+		{
+			"path": "/var/mnt"
 		}
 	],
 	"tasks": {
 		"version": "2.0.0",
 		"tasks": [
+			{
+				"label": "sync services",
+				"type": "process",
+				"command": "fish",
+				"args": [
+					"sync.fish"
+				],
+				"problemMatcher": [],
+				"presentation": {
+					"reveal": "always",
+					"panel": "shared"
+				}
+			},
 			{
 				"label": "daemon",
 				"type": "process",
@@ -14,17 +30,407 @@
 				"args": [
 					"daemon-reload"
 				],
-				"problemMatcher": []
+				"problemMatcher": [],
+				"presentation": {
+					"reveal": "never"
+				}
 			},
 			{
-				"label": "isolate base",
+				"label": "isolate multi-user",
 				"type": "process",
 				"command": "systemctl",
 				"args": [
 					"isolate",
 					"multi-user"
-				]
+				],
+				"problemMatcher": []
+			},
+			{
+				"label": "start target",
+				"type": "process",
+				"command": "systemctl",
+				"args": [
+					"start",
+					"default.target"
+				],
+				"problemMatcher": []
+			},
+			{
+				"label": "build avahi",
+				"type": "process",
+				"command": "fish",
+				"args": [
+					"build.fish"
+				],
+				"problemMatcher": [],
+				"options": {
+					"cwd": "${workspaceFolder}/images/avahi"
+				},
+				"presentation": {
+					"reveal": "always",
+					"panel": "shared"
+				}
+			},
+			{
+				"label": "build cloud",
+				"type": "process",
+				"command": "fish",
+				"args": [
+					"build.fish"
+				],
+				"problemMatcher": [],
+				"options": {
+					"cwd": "${workspaceFolder}/images/cloud"
+				},
+				"presentation": {
+					"reveal": "always",
+					"panel": "shared"
+				}
+			},
+			{
+				"label": "build docs",
+				"type": "process",
+				"command": "fish",
+				"args": [
+					"build.fish"
+				],
+				"problemMatcher": [],
+				"options": {
+					"cwd": "${workspaceFolder}/images/docs"
+				},
+				"presentation": {
+					"reveal": "always",
+					"panel": "shared"
+				}
+			},
+			{
+				"label": "build freshrss",
+				"type": "process",
+				"command": "fish",
+				"args": [
+					"build.fish"
+				],
+				"problemMatcher": [],
+				"options": {
+					"cwd": "${workspaceFolder}/images/freshrss"
+				},
+				"presentation": {
+					"reveal": "always",
+					"panel": "shared"
+				}
+			},
+			{
+				"label": "build ingress",
+				"type": "process",
+				"command": "fish",
+				"args": [
+					"build.fish"
+				],
+				"problemMatcher": [],
+				"options": {
+					"cwd": "${workspaceFolder}/images/ingress"
+				},
+				"presentation": {
+					"reveal": "always",
+					"panel": "shared"
+				}
+			},
+			{
+				"label": "build media",
+				"type": "process",
+				"command": "fish",
+				"args": [
+					"build.fish"
+				],
+				"problemMatcher": [],
+				"options": {
+					"cwd": "${workspaceFolder}/images/media"
+				},
+				"presentation": {
+					"reveal": "always",
+					"panel": "shared"
+				}
+			},
+			{
+				"label": "build mosquitto",
+				"type": "process",
+				"command": "fish",
+				"args": [
+					"build.fish"
+				],
+				"problemMatcher": [],
+				"options": {
+					"cwd": "${workspaceFolder}/images/mosquitto"
+				},
+				"presentation": {
+					"reveal": "always",
+					"panel": "shared"
+				}
+			},
+			{
+				"label": "build nodered",
+				"type": "process",
+				"command": "fish",
+				"args": [
+					"build.fish"
+				],
+				"problemMatcher": [],
+				"options": {
+					"cwd": "${workspaceFolder}/images/nodered"
+				},
+				"presentation": {
+					"reveal": "always",
+					"panel": "shared"
+				}
+			},
+			{
+				"label": "build samba",
+				"type": "process",
+				"command": "fish",
+				"args": [
+					"build.fish"
+				],
+				"problemMatcher": [],
+				"options": {
+					"cwd": "${workspaceFolder}/images/samba"
+				},
+				"presentation": {
+					"reveal": "always",
+					"panel": "shared"
+				}
+			},
+			{
+				"label": "restart audiobookshelf",
+				"type": "process",
+				"command": "systemctl",
+				"args": [
+					"restart",
+					"audiobookshelf"
+				],
+				"problemMatcher": [],
+				"presentation": {
+					"reveal": "never",
+					"panel": "shared",
+					"showReuseMessage": false
+				}
+			},
+			{
+				"label": "restart avahi",
+				"type": "process",
+				"command": "systemctl",
+				"args": [
+					"restart",
+					"avahi"
+				],
+				"problemMatcher": [],
+				"presentation": {
+					"reveal": "never",
+					"panel": "shared",
+					"showReuseMessage": false
+				}
+			},
+			{
+				"label": "restart cloud",
+				"type": "process",
+				"command": "systemctl",
+				"args": [
+					"restart",
+					"cloud"
+				],
+				"problemMatcher": [],
+				"presentation": {
+					"reveal": "never",
+					"panel": "shared",
+					"showReuseMessage": false
+				}
+			},
+			{
+				"label": "restart docs",
+				"type": "process",
+				"command": "systemctl",
+				"args": [
+					"restart",
+					"docs"
+				],
+				"problemMatcher": [],
+				"presentation": {
+					"reveal": "never",
+					"panel": "shared",
+					"showReuseMessage": false
+				}
+			},
+			{
+				"label": "restart forgejo",
+				"type": "process",
+				"command": "systemctl",
+				"args": [
+					"restart",
+					"forgejo"
+				],
+				"problemMatcher": [],
+				"presentation": {
+					"reveal": "never",
+					"panel": "shared",
+					"showReuseMessage": false
+				}
+			},
+			{
+				"label": "restart freshrss",
+				"type": "process",
+				"command": "systemctl",
+				"args": [
+					"restart",
+					"freshrss"
+				],
+				"problemMatcher": [],
+				"presentation": {
+					"reveal": "never",
+					"panel": "shared",
+					"showReuseMessage": false
+				}
+			},
+			{
+				"label": "restart home",
+				"type": "process",
+				"command": "systemctl",
+				"args": [
+					"restart",
+					"home"
+				],
+				"problemMatcher": [],
+				"presentation": {
+					"reveal": "never",
+					"panel": "shared",
+					"showReuseMessage": false
+				}
+			},
+			{
+				"label": "restart immich",
+				"type": "process",
+				"command": "systemctl",
+				"args": [
+					"restart",
+					"immich"
+				],
+				"problemMatcher": [],
+				"presentation": {
+					"reveal": "never",
+					"panel": "shared",
+					"showReuseMessage": false
+				}
+			},
+			{
+				"label": "restart ingress",
+				"type": "process",
+				"command": "systemctl",
+				"args": [
+					"restart",
+					"ingress"
+				],
+				"problemMatcher": [],
+				"presentation": {
+					"reveal": "never",
+					"panel": "shared",
+					"showReuseMessage": false
+				}
+			},
+			{
+				"label": "restart media",
+				"type": "process",
+				"command": "systemctl",
+				"args": [
+					"restart",
+					"media"
+				],
+				"problemMatcher": [],
+				"presentation": {
+					"reveal": "never",
+					"panel": "shared",
+					"showReuseMessage": false
+				}
+			},
+			{
+				"label": "restart mosquitto",
+				"type": "process",
+				"command": "systemctl",
+				"args": [
+					"restart",
+					"mosquitto"
+				],
+				"problemMatcher": [],
+				"presentation": {
+					"reveal": "never",
+					"panel": "shared",
+					"showReuseMessage": false
+				}
+			},
+			{
+				"label": "restart nodered",
+				"type": "process",
+				"command": "systemctl",
+				"args": [
+					"restart",
+					"nodered"
+				],
+				"problemMatcher": [],
+				"presentation": {
+					"reveal": "never",
+					"panel": "shared",
+					"showReuseMessage": false
+				}
+			},
+			{
+				"label": "restart ollama",
+				"type": "process",
+				"command": "systemctl",
+				"args": [
+					"restart",
+					"ollama"
+				],
+				"problemMatcher": [],
+				"presentation": {
+					"reveal": "never",
+					"panel": "shared",
+					"showReuseMessage": false
+				}
+			},
+			{
+				"label": "restart samba",
+				"type": "process",
+				"command": "systemctl",
+				"args": [
+					"restart",
+					"samba"
+				],
+				"problemMatcher": [],
+				"presentation": {
+					"reveal": "never",
+					"panel": "shared",
+					"showReuseMessage": false
+				}
+			},
+			{
+				"label": "restart vault",
+				"type": "process",
+				"command": "systemctl",
+				"args": [
+					"restart",
+					"vault"
+				],
+				"problemMatcher": [],
+				"presentation": {
+					"reveal": "never",
+					"panel": "shared",
+					"showReuseMessage": false
+				}
 			}
+		]
+	},
+	"extensions": {
+		"recommendations": [
+			"coolbear.systemd-unit-file",
+			"anthropic.claude-code",
+			"ms-vscode.vscode-chat-customizations-evaluations"
 		]
 	}
 }
