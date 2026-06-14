@@ -77,6 +77,16 @@ Vaultwarden uses SQLite at `/var/mnt/persist/vault/db.sqlite3`. Migration from P
 | Audiobookshelf | audiobookshelf.container | upstream (Nix) | Audiobooks/podcasts |
 | Avahi | avahi.container | avahi | mDNS discovery |
 | Forgejo | forgejo.container | upstream | Git service, SQLite |
+| mail2task | mail2task.container | upstream (ghcr) | IMAP→Ollama→Todoist worker, no web UI |
+
+## Secret Management
+
+Sensitive values are podman secrets, created from Kubernetes Secret YAMLs:
+
+- Secrets live as `metadata.name` + `stringData` in `/var/mnt/persist/secret-<name>.yml`
+- `/usr/local/bin/plain-secret.py <file>` extracts the first `stringData` value and creates a plain podman secret named `<metadata.name>_plain` (uses `podman secret create --replace`; `--suffix` overrides the default `_plain`)
+- `.container` quadlets inject them with `Secret=<name>_plain,type=env,target=<ENV_VAR>` (e.g. `ingress` → `ollama_api_key_plain`; `mail2task` → `strato_verwaltung_plain`, `todoist_api_plain`)
+- Name secrets by account/credential so they're reusable across services — not service-prefixed
 
 ## Conventions
 
