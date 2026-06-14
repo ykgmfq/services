@@ -1,6 +1,11 @@
 # Agent Instructions
 
-Homelab infrastructure project managing containerized services on a single host via **Podman Quadlets** and **systemd**. Domain: `dm-poepperl.de`.
+This is a homelab infrastructure project that manages containerized services on a single host via Podman Quadlets and systemd.
+The domain is `dm-poepperl.de`.
+
+This file is the overview.
+Image build details live in [images/CLAUDE.md](images/CLAUDE.md).
+Deployment, database, and secret details live in [systemd/CLAUDE.md](systemd/CLAUDE.md).
 
 ## Toolchain
 
@@ -10,90 +15,23 @@ Homelab infrastructure project managing containerized services on a single host 
 - **Reverse proxy**: Caddy (ingress service, host networking)
 - **Databases**: PostgreSQL (pods), SQLite (vault)
 - **Storage**: ZFS (`data/persist/*`, `data/media`)
-- **Sync**: `fish sync.fish` — rclone `systemd/` → `/etc/containers/systemd/`, podman generator dry-run, `daemon-reload`
+- **Sync**: `fish sync.fish` — rclone `systemd/` → `/etc/containers/systemd/` (excludes `*.md`), podman generator dry-run, `daemon-reload`
 
 ## Directory Layout
 
 ```
-images/<service>/          Build context — each has a build.fish
-  build.fish               Buildah recipe (fish shell)
-  src/                     Files copied into image (install.sh, Caddyfile, configs)
-    units/                 Systemd units that run inside the container
-systemd/                   Quadlet files deployed to /etc/containers/systemd/
-  *.container              Single-container quadlets
-  *.kube + *.yml           Multi-container pod quadlets (Kubernetes Pod v1 YAML)
+images/     Build contexts, one per locally built service — see images/CLAUDE.md
+systemd/    Quadlet files deployed to /etc/containers/systemd/ — see systemd/CLAUDE.md
+sync.fish   Deploy script: rclone systemd/ → /etc/containers/systemd/, validate, daemon-reload
 ```
-
-### Storage paths (on host)
-
-| Path | Purpose | Backed up |
-|---|---|---|
-| `/var/mnt/persist/<service>/` | Persistent app data, databases | Yes (ZFS snapshots) |
-| `/var/mnt/persist/<service>/db/` | PostgreSQL data dirs | Yes |
-| `/var/mnt/ephemeral/` | Caches, downloads, this repo | No |
-| Podman PVCs | Ephemeral managed volumes | No |
-
-## Sync & Deploy Workflow
-
-```fish
-fish sync.fish               # rclone systemd/ → /etc/containers/systemd/, validate, daemon-reload
-systemctl isolate multi-user # stop all prod services cleanly
-systemctl start prod.target  # start all prod services with new config
-```
-
-Or use VS Code tasks: "build <service>", "restart <service>", "sync services", "daemon", "start target".
-
-## Database Management
-
-### PostgreSQL
-
-Used by: cloud, docs, immich. Password: `a` (internal pod network only). Data in `/var/mnt/persist/<service>/db`.
-
-**Major version upgrade**: `fish update-pg.fish <service> <target-major>`
-- Creates ZFS snapshot `data/persist/<service>/db@pre-pg-upgrade` for rollback
-- Dumps from old major, clears datadir, restores into new major
-- PostgreSQL 18+ uses `/var/lib/postgresql/<major>/docker` layout
-
-### SQLite (Vault)
-
-Vaultwarden uses SQLite at `/var/mnt/persist/vault/db.sqlite3`. Migration from PostgreSQL via `deploy-vault-sqlite.fish` + `pg2sqlite.py`.
-
-## Services
-
-| Service | Quadlet | Images | Notes |
-|---|---|---|---|
-| Nextcloud | cloud.kube + cloud.yml | cloud, cloud-web + postgres, valkey, imaginary | Multi-container pod |
-| Paperless | docs.kube + docs.yml | docs + postgres, valkey | Multi-container pod |
-| Immich | immich.kube + immich.yml | upstream + postgres, valkey | Multi-container pod |
-| Vaultwarden | vault.kube + vault.yml | upstream | SQLite backend |
-| Ingress | ingress.container | ingress (Caddy) | Host networking, TLS |
-| Mosquitto | mosquitto.container | mosquitto | MQTT on 127.0.0.1:1883-1884 |
-| Samba | samba.container | samba | File sharing, needs credentials |
-| Jellyfin | media.container | media | Media server |
-| FreshRSS | freshrss.container | freshrss | RSS reader |
-| Node-RED | nodered.container | nodered | Automation |
-| Ollama | ollama.container | upstream | LLM inference |
-| Home | home.container | upstream | Home Assistant |
-| Audiobookshelf | audiobookshelf.container | upstream (Nix) | Audiobooks/podcasts |
-| Avahi | avahi.container | avahi | mDNS discovery |
-| Forgejo | forgejo.container | upstream | Git service, SQLite |
-| mail2task | mail2task.container | upstream (ghcr) | IMAP→Ollama→Todoist worker, no web UI |
-
-## Secret Management
-
-Sensitive values are podman secrets, created from Kubernetes Secret YAMLs:
-
-- Secrets live as `metadata.name` + `stringData` in `/var/mnt/persist/secret-<name>.yml`
-- `/usr/local/bin/plain-secret.py <file>` extracts the first `stringData` value and creates a plain podman secret named `<metadata.name>_plain` (uses `podman secret create --replace`; `--suffix` overrides the default `_plain`)
-- `.container` quadlets inject them with `Secret=<name>_plain,type=env,target=<ENV_VAR>` (e.g. `ingress` → `ollama_api_key_plain`; `mail2task` → `strato_verwaltung_plain`, `todoist_api_plain`)
-- Name secrets by account/credential so they're reusable across services — not service-prefixed
 
 ## Conventions
 
 - Service name = directory name = image tag = systemd unit name
 - Fish shell for all scripts — no bash
 - Buildah for image construction — no Dockerfile
-- Security: `automountServiceAccountToken: false` in all pods
-- DB passwords are `a` — services are not exposed externally, only via Caddy reverse proxy
-- UIDs are per-service (832=cloud, 844=vault, 879=scan/docs, 997=media, 1883=mosquitto)
-- Caddy strips `x-powered-by` and `server` headers, adds HSTS and security headers
+- Human-facing text — markdown, comments, log messages, and commit messages — uses proper prose: full sentences, plain words, no terse shorthand
+- In markdown, each sentence starts on its own line, so a one-sentence change touches only one line in the diff
+- The README is an abstract that answers "what is this and why does it exist?"; configuration, installation, and usage belong in the GitHub wiki. When wiki content needs updating, write it into the uncommitted `wiki.md` at the repo root
+- In GitHub Actions, longer `run:` blocks live in `.github/scripts/` and are referenced from the step; one-liners stay inline
+- Shell scripts avoid backslash line continuations; use intermediate variables instead

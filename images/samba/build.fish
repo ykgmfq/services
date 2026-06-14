@@ -20,13 +20,12 @@ set alpine 3
 set idmedia 997
 set idscan 879
 set install (cat src/install.sh | string collect)
+set config --port 445
+set --append config --cmd 'smbd --foreground --no-process-group'
 set ctr (buildah from --pull docker.io/library/alpine:$alpine)
 and buildah run --env pwscan=$pwscan --env pwmedia=$pwmedia --env idscan=$idscan --env idmedia=$idmedia $ctr sh -c $install
 and buildah copy $ctr src/smb.conf /etc/samba/
 and buildah copy $ctr src/monitor /opt/monitor
-and buildah config \
-    --port 445 \
-    --cmd 'smbd --foreground --no-process-group' \
-    $ctr
+and buildah config $config $ctr
 and buildah commit --rm $ctr $tag
 or abort $ctr
