@@ -7,6 +7,7 @@ AutoUpdate=registry
 Image=ghcr.io/ykgmfq/mail2task:latest
 ContainerName=mail2task
 Network=ollama.network
+ReadOnly=true
 Environment=OLLAMA_HOST=http://ollama:11434
 Environment=OLLAMA_MODEL=gemma4:e4b
 Environment=IMAP_HOST=imap.strato.de

@@ -3,6 +3,7 @@ AutoUpdate=registry
 Image=docker.io/ollama/ollama
 ContainerName=ollama
 Network=ollama.network
+ReadOnly=true
 Volume=ollama-models:/root/.ollama
 # Environment=OLLAMA_DEBUG=1
 Environment=OLLAMA_ORIGINS=*

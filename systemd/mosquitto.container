@@ -8,6 +8,7 @@ ContainerName=mosquitto
 Network=mosquitto.network
 PublishPort=127.0.0.1:1883:1883
 AutoUpdate=local
+ReadOnly=true
 Secret=mosquitto_passwords,uid=1883,gid=1883,mode=0400
 HealthCmd=mosquitto_sub --id healthcheck --topic '$SYS/broker/version' -C 1
 HealthOnFailure=kill

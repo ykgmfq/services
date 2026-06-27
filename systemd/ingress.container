@@ -17,6 +17,8 @@ Network=audiobookshelf.network
 Network=mosquitto.network
 Network=forgejo.network
 AutoUpdate=local
+ReadOnly=true
+Tmpfs=/config
 Volume=/var/mnt/persist/ingress:/data
 Secret=ollama_api_key_plain,type=env,target=OLLAMA_API_KEY
 Secret=nodered_basicauth_plain,type=env,target=NODERED_BASICAUTH

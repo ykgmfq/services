@@ -4,6 +4,7 @@ AutoUpdate=registry
 ContainerName=vault
 Network=vault.network
 UserNS=keep-id:uid=844,gid=844
+ReadOnly=true
 Volume=/var/mnt/persist/vault:/data
 Volume=/var/mnt/ephemeral/vault-icons:/var/icons
 Secret=cloud_smtp,type=env,target=SMTP_PASSWORD
