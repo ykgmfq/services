@@ -1,0 +1,13 @@
+{
+  "name": "homelab-node-red",
+  "version": "1.0.0",
+  "description": "Node-RED for the homelab with pinned contrib nodes.",
+  "private": true,
+  "dependencies": {
+    "node-red": "~4.1.0",
+    "node-red-contrib-home-assistant-websocket": "~0.80.0",
+    "node-red-contrib-sun-position": "~2.1.0",
+    "node-red-contrib-timed-counter": "*",
+    "node-red-contrib-spline-curve": "*"
+  }
+}
