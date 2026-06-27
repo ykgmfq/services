@@ -8,7 +8,7 @@ mv /srv/* /srv/FreshRSS
 ls -l /srv/
 # Package management
 f install caddy systemd \
-php{,-{cli,gmp,fpm,xml,mbstring,intl,opcache,zip,sqlite3}}
+php{,-{cli,gmp,fpm,xml,mbstring,intl,opcache,zip,sqlite3,pecl-apcu}}
 #f reinstall tzdata
 f clean all
 # Create user and matching group
