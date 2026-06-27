@@ -19,6 +19,7 @@ Network=forgejo.network
 AutoUpdate=local
 Volume=/var/mnt/persist/ingress:/data
 Secret=ollama_api_key_plain,type=env,target=OLLAMA_API_KEY
+Secret=nodered_basicauth_plain,type=env,target=NODERED_BASICAUTH
 HealthCmd=curl --fail --silent --show-error localhost || exit 1
 HealthOnFailure=kill
 HealthInterval=5m
