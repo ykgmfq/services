@@ -5,35 +5,22 @@ metadata:
   annotations:
     io.containers.autoupdate: registry
     io.containers.autoupdate/app: local
-    io.containers.autoupdate/web: local
   labels:
     app: cloud-pod
   name: cloud-pod
 spec:
   automountServiceAccountToken: false
   containers:
-    - image: localhost/cloud-web:latest
-      name: web
+    - image: localhost/cloud:latest
+      name: app
       ports:
         - name: web
           containerPort: 80
       volumeMounts:
-        - mountPath: /srv/de.dm-poepperl.cloud
-          name: cloud-pvc
-          readOnly: true
-        - mountPath: /srv/de.dm-poepperl.cloud/data/appdata_och5khtk0i0u/preview
-          name: cloud-preview-pvc
-          readOnly: true
-      livenessProbe:
-        httpGet:
-          path: /alive
-          port: 80
-        periodSeconds: 300
-    - image: localhost/cloud:latest
-      name: app
-      volumeMounts:
-        - mountPath: /srv/de.dm-poepperl.cloud
-          name: cloud-pvc
+        - mountPath: /usr/share/nextcloud/config
+          name: cloud-config-pvc
+        - mountPath: /srv/de.dm-poepperl.cloud/data
+          name: cloud-data-pvc
         - mountPath: /srv/de.dm-poepperl.cloud/data/appdata_och5khtk0i0u/preview
           name: cloud-preview-pvc
       livenessProbe:
@@ -76,9 +63,12 @@ spec:
             - ping
         periodSeconds: 300
   volumes:
-    - name: cloud-pvc
+    - name: cloud-config-pvc
       hostPath:
-        path: /var/mnt/persist/cloud
+        path: /var/mnt/persist/cloud/config
+    - name: cloud-data-pvc
+      hostPath:
+        path: /var/mnt/persist/cloud/data
     - name: cloud-db-pvc
       hostPath:
         path: /var/mnt/persist/cloud/db

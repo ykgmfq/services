@@ -5,6 +5,7 @@ After=image-bootstrap@%N.service
 [Kube]
 Yaml=/etc/containers/systemd/cloud.yml
 Network=cloud.network
+Network=ollama.network
 
 [Service]
 Restart=on-failure

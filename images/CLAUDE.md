@@ -20,8 +20,8 @@ They derive the tag from the directory name with `set tag (basename (pwd))`.
 They start a container with `set ctr (buildah from --pull <base>)`, then chain the build steps with `and` so any failure short-circuits to `or abort $ctr`.
 They finish with `buildah commit --rm $ctr $tag`.
 
-Multi-image services commit several tags from one script.
-For example, `cloud/build.fish` builds both `cloud-web` (Caddy front end) and `cloud` (Fedora php-fpm).
+A `build.fish` may commit several tags from one script if a service needs more than one image.
+The `cloud` recipe is a single Fedora image that bundles php-fpm, Caddy, and a baked, read-only copy of the Nextcloud server and its pinned apps under `/usr/share/nextcloud`; the major version it pins is resolved at build time by `cloud/src/nextcloud.fish`.
 
 ## Build-time credentials
 

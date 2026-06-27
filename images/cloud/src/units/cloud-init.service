@@ -1,8 +1,9 @@
+[Unit]
+Before=php-fpm.service
+
 [Service]
 User=cloud
 Type=oneshot
-KillMode=process
-ExecCondition=/usr/bin/php occ status -e
-ExecStart=/usr/bin/php cron.php
 WorkingDirectory=/usr/share/nextcloud
 Slice=cloud-maint.slice
+ExecStart=/usr/bin/bash /usr/local/bin/cloud-init.sh

@@ -32,7 +32,7 @@ You can also use the VS Code tasks "sync services", "daemon", "isolate multi-use
 
 | Service | Quadlet | Images | Notes |
 |---|---|---|---|
-| Nextcloud | cloud.kube + cloud.yml | cloud, cloud-web + postgres, valkey, imaginary | Multi-container pod |
+| Nextcloud | cloud.kube + cloud.yml | cloud (php-fpm + Caddy + baked Nextcloud) + postgres, valkey, imaginary | Multi-container pod |
 | Paperless | docs.kube + docs.yml | docs + postgres, valkey | Multi-container pod |
 | Immich | immich.kube + immich.yml | upstream + postgres, valkey | Multi-container pod |
 | Vaultwarden | vault.kube + vault.yml | upstream | SQLite backend |

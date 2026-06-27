@@ -1,4 +1,4 @@
 [Unit]
-Requires=php-fpm.service
-After=php-fpm.service
-Wants=cloud-bg-worker@0.service cloud-bg-worker@1.service cloud-bg-worker@2.service
+Wants=caddy.service cloud-bg-worker@0.service cloud-bg-worker@1.service cloud-bg-worker@2.service
+Requires=cloud-init.service php-fpm.service
+After=cloud-init.service php-fpm.service

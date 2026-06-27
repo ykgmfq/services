@@ -8,9 +8,9 @@
 	}
 }
 :80 {
-	root * /srv/de.dm-poepperl.cloud/html
+	root * /usr/share/nextcloud
 	file_server
-	php_fastcgi localhost:8000
+	php_fastcgi unix//run/php-fpm/cloud.sock
 	@dav {
 		path /.well-known/carddav
 		path /.well-known/caldav
