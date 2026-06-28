@@ -25,8 +25,8 @@ The `cloud` recipe is a single Fedora image that bundles php-fpm, Caddy, and a b
 
 ## Build-time credentials
 
-Some images need secrets at build time, which are read from `$CREDENTIALS_DIRECTORY`.
-`samba/build.fish` sources `$CREDENTIALS_DIRECTORY/secrets` when present, and otherwise falls back to a credentials path passed as the first argument.
+No image currently needs secrets at build time, so every build is reproducible and free of credential material.
+The `samba` image used to bake its passwords in at build time, but now builds secret-free and receives its passwords at runtime through a podman file secret mounted at `/run/secrets/samba_passwords`, which its entrypoint reads to build the user database on a tmpfs.
 This keeps passwords out of the image history and the repository.
 
 ## Per-service UIDs

@@ -5,7 +5,10 @@ After=image-bootstrap@%N.service
 [Container]
 Image=localhost/samba
 PublishPort=445:445
+Secret=samba_passwords,mode=0400
 AutoUpdate=local
+ReadOnly=true
+Tmpfs=/var/log/samba:mode=0755
 Volume=/var/mnt/media:/srv/media
 Volume=docs-scan:/srv/scans
 HealthCmd=sh /opt/monitor/alive.sh

@@ -38,7 +38,7 @@ You can also use the VS Code tasks "sync services", "daemon", "isolate multi-use
 | Vaultwarden | vault.kube + vault.yml | upstream | SQLite backend |
 | Ingress | ingress.container | ingress (Caddy) | Host networking, TLS |
 | Mosquitto | mosquitto.container | mosquitto | MQTT on 127.0.0.1:1883-1884 |
-| Samba | samba.container | samba | File sharing, needs credentials |
+| Samba | samba.container | samba | File sharing, runtime file secret `samba_passwords` |
 | Jellyfin | media.container | media | Media server |
 | FreshRSS | freshrss.container | freshrss | RSS reader |
 | Node-RED | nodered.container | nodered | Automation |
@@ -74,6 +74,11 @@ The secrets live as `metadata.name` plus `stringData` in `/var/mnt/persist/secre
 `/usr/local/bin/plain-secret.py <file>` extracts the first `stringData` value and creates a plain podman secret named `<metadata.name>_plain`, using `podman secret create --replace`; the `--suffix` flag overrides the default `_plain`.
 The `.container` quadlets inject these with `Secret=<name>_plain,type=env,target=<ENV_VAR>`, for example `ingress` injecting `ollama_api_key_plain`, and `mail2task` injecting `strato_verwaltung_plain` and `todoist_api_plain`.
 Name secrets by account or credential so that they can be reused across services, rather than prefixing them with a service name.
+
+A secret can also be mounted as a file rather than injected as an environment variable: `Secret=<name>,mode=0400` surfaces it inside the container at `/run/secrets/<name>`.
+Such a file secret holds a whole file (for example a multi-line password map), so the YAML keeps that whole file as a single multi-line `stringData` block scalar, and `plain-secret.py --suffix '' <file>` creates the bare-named secret from it.
+`samba` mounts `samba_passwords` this way: `/var/mnt/persist/secret-samba-passwords.yml` carries `<user>=<password>` lines that its entrypoint iterates over to build the user database at startup.
+`mosquitto` mounts `mosquitto_passwords` similarly, though its secret is created directly from a password file with `podman secret create` rather than through a YAML.
 
 ## Pod runtime conventions
 
