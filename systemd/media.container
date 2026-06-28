@@ -7,6 +7,9 @@ Image=localhost/media
 ContainerName=media
 Network=media.network
 AutoUpdate=local
+ReadOnly=true
+Tmpfs=/var/log/jellyfin:mode=0755
+Tmpfs=/var/cache/fontconfig:mode=0755
 Environment=JELLYFIN_CACHE_DIR=/var/cache/jellyfin
 Environment=JELLYFIN_DATA_DIR=/var/lib/jellyfin
 Environment=JELLYFIN_LOG_DIR=/var/log/jellyfin
