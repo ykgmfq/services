@@ -3,9 +3,12 @@ Wants=image-bootstrap@%N.service image-build@%N.timer
 After=image-bootstrap@%N.service
 
 [Container]
+Network=ingress.network
 Image=localhost/ingress
 PublishPort=443:443
+PublishPort=[::]:443:443
 PublishPort=80:80
+PublishPort=[::]:80:80
 Network=cloud.network
 Network=docs.network
 Network=immich.network
