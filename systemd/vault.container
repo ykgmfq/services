@@ -7,7 +7,7 @@ UserNS=keep-id:uid=844,gid=844
 ReadOnly=true
 Volume=/var/mnt/persist/vault:/data
 Volume=/var/mnt/ephemeral/vault-icons:/var/icons
-Secret=cloud_smtp,type=env,target=SMTP_PASSWORD
+Secret=cloud_smtp_plain,type=env,target=SMTP_PASSWORD
 Environment=TZ=Europe/Berlin
 Environment=ICON_CACHE_FOLDER=/var/icons
 Environment=ROCKET_PORT=8087

@@ -56,6 +56,9 @@ spec:
           name: docs-thumbnails-pvc
         - mountPath: /usr/src/paperless/data
           name: docs-pvc
+        - mountPath: /usr/src/paperless/scripts/passwords.txt
+          name: pdf-passwords
+          readOnly: true
     - name: db
       securityContext:
         runAsGroup: 879
@@ -95,3 +98,7 @@ spec:
     - name: docs-scan-pvc
       persistentVolumeClaim:
         claimName: docs-scan
+    - name: pdf-passwords
+      hostPath:
+        path: /var/mnt/persist/secrets/pdf_passwords.txt
+        type: File
