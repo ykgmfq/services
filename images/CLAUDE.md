@@ -14,33 +14,23 @@ Each subdirectory is named after its service, and that name is also the resultin
 
 ## The build.fish recipe pattern
 
-Every `build.fish` is a fish script that drives Buildah, and the scripts share a common shape.
-They define an `abort` function that removes the working container and exits non-zero.
-They derive the tag from the directory name with `set tag (basename (pwd))`.
-They start a container with `set ctr (buildah from --pull <base>)`, then chain the build steps with `and` so any failure short-circuits to `or abort $ctr`.
-They finish with `buildah commit --rm $ctr $tag`.
-
-A `build.fish` may commit several tags from one script if a service needs more than one image.
-The `cloud` recipe is a single Fedora image that bundles php-fpm, Caddy, and a baked, read-only copy of the Nextcloud server and its pinned apps under `/usr/share/nextcloud`; the major version it pins is resolved at build time by `cloud/src/nextcloud.fish`.
+Every `build.fish` follows the same Buildah shape: derive tag from directory name, start a working container, chain steps with `and` / `or abort`, commit.
+A `build.fish` may commit several tags if a service needs more than one image.
+The `cloud` recipe pins a Nextcloud major version resolved at build time by `cloud/src/nextcloud.fish`.
 
 ## Build-time credentials
 
-No image currently needs secrets at build time, so every build is reproducible and free of credential material.
-The `samba` image used to bake its passwords in at build time, but now builds secret-free and receives its passwords at runtime through a podman file secret mounted at `/run/secrets/samba_passwords`, which its entrypoint reads to build the user database on a tmpfs.
-This keeps passwords out of the image history and the repository.
+No image needs secrets at build time; every build is reproducible and free of credential material.
+`samba` receives its passwords at runtime through a podman file secret mounted at `/run/secrets/samba_passwords`, which its entrypoint reads to build the user database on a tmpfs.
+`docs` receives `pdf_passwords.txt` at runtime through a `hostPath` volume mounted at `/usr/src/paperless/scripts/passwords.txt`.
 
 ## Per-service UIDs
 
 User IDs are fixed per service so that file ownership stays stable across rebuilds and on the host bind mounts.
 The current assignments are 832 for cloud, 844 for vault, 879 for scan/docs, 997 for media, and 1883 for mosquitto.
 
-## Locally built versus upstream
-
-Built here: avahi, cloud, docs, freshrss, ingress, media, mosquitto, nodered, samba.
-Pulled upstream instead of built here: immich, vaultwarden, ollama, home (Home Assistant), audiobookshelf, forgejo, mail2task.
-
 ## Conventions
 
 Image construction uses Buildah, never a Dockerfile.
 All build scripts are fish, never bash.
-Avoid backslash line continuations in the recipes; collect multi-flag invocations such as `buildah config` into a fish list variable and expand it, as in `set config --port 8096 --cmd /usr/bin/jellyfin` followed by `buildah config $config $ctr`.
+Avoid backslash line continuations in the recipes; collect multi-flag invocations into a fish list variable instead.
