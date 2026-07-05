@@ -4,7 +4,7 @@ function abort
     exit 1
 end
 set tag (basename (pwd))
-set alpine 3.23
+set alpine 3.24
 echo "Alpine | $alpine"
 echo "Tag    | $tag"
 set config --port 8096
