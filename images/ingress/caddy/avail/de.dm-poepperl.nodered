@@ -2,7 +2,7 @@ nodered.dm-poepperl.de {
   basicauth {
     admin {env.NODERED_BASICAUTH}
   }
-  reverse_proxy host.containers.internal:1880
+  reverse_proxy nodered:1880
   import stdheader
   header / Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; connect-src 'self';"
   encode zstd gzip

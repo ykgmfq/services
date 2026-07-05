@@ -4,9 +4,9 @@ After=image-bootstrap@%N.service home.service
 
 [Container]
 Image=localhost/nodered
+ContainerName=nodered
 Environment=TZ=Europe/Berlin
-#PublishPort=127.0.0.1:1880:1880
-Network=host
+Network=nodered.network
 #User=110
 #Group=0
 Volume=/var/mnt/persist/home/nodered:/data
