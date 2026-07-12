@@ -10,7 +10,7 @@ metadata:
 spec:
   containers:
     - name: app
-      image: ghcr.io/immich-app/immich-server:v2
+      image: ghcr.io/immich-app/immich-server:v3
       volumeMounts:
         - mountPath: /data
           name: immich-pvc
@@ -42,7 +42,7 @@ spec:
           port: 2283
         periodSeconds: 300
     - name: ml
-      image: ghcr.io/immich-app/immich-machine-learning:v2
+      image: ghcr.io/immich-app/immich-machine-learning:v3
       volumes:
         - immich-modelcache-pvc:/cache
       livenessProbe:
