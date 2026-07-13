@@ -1,0 +1,6 @@
+calendar
+contacts
+mail
+onlyoffice
+integration_openai
+previewgenerator

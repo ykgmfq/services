@@ -8,7 +8,7 @@
 # copied into the image as a read-only tree.
 
 set stage $argv[1]
-set apps calendar contacts mail onlyoffice integration_openai
+set apps (cat (status dirname)/apps.txt)
 set base https://download.nextcloud.com/server/releases
 set store https://apps.nextcloud.com/api/v1
 
