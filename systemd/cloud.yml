@@ -28,6 +28,8 @@ spec:
           command:
             - /usr/bin/bash
             - /usr/local/bin/alive.sh
+        initialDelaySeconds: 90
+        timeoutSeconds: 5
         periodSeconds: 300
     - image: docker.io/library/postgres:18-alpine
       name: db

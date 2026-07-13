@@ -93,4 +93,7 @@ for a in $apps
     or exit 1
 end
 
+# Carried into the image so cloud-init.sh can enable every baked app at container start.
+cp (status dirname)/apps.txt $stage/apps.txt
+
 rm -f $feed
