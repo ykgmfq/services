@@ -38,8 +38,6 @@ spec:
           value: deu+eng
         - name: PAPERLESS_OCR_CLEAN
           value: clean-final
-        - name: PAPERLESS_OCR_SKIP_ARCHIVE_FILE
-          value: with_text
         - name: PAPERLESS_DATA_DIR
           value: /usr/src/paperless/data
         - name: PAPERLESS_MEDIA_ROOT
@@ -49,6 +47,20 @@ spec:
             secretKeyRef:
               name: docs_key
               key: key
+        - name: PAPERLESS_AI_ENABLED
+          value: "true"
+        - name: PAPERLESS_AI_LLM_BACKEND
+          value: ollama
+        - name: PAPERLESS_AI_LLM_ENDPOINT
+          value: http://ollama:11434
+        - name: PAPERLESS_AI_LLM_MODEL
+          value: gemma4:e4b
+        - name: PAPERLESS_AI_LLM_EMBEDDING_BACKEND
+          value: ollama
+        - name: PAPERLESS_AI_LLM_EMBEDDING_ENDPOINT
+          value: http://ollama:11434
+        - name: PAPERLESS_AI_LLM_EMBEDDING_MODEL
+          value: embeddinggemma
       volumeMounts:
         - mountPath: /usr/src/paperless/consume
           name: docs-scan-pvc

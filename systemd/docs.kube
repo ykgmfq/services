@@ -1,10 +1,11 @@
 [Unit]
-Wants=image-bootstrap@%N.service image-build@%N.timer
-After=image-bootstrap@%N.service
+Wants=image-bootstrap@%N.service image-build@%N.timer ollama.service
+After=image-bootstrap@%N.service ollama.service
 
 [Kube]
 Yaml=/etc/containers/systemd/docs.yml
 Network=docs.network
+Network=ollama.network
 
 [Service]
 Restart=on-failure
