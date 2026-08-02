@@ -22,6 +22,8 @@ mv Caddyfile /etc/caddy/Caddyfile
 new_units=$(ls units/)
 mv units/* /etc/systemd/system/
 mv alive.sh cloud-init.sh /usr/local/bin/
+# Kept out of the Nextcloud tree, where core's integrity check rejects extra files
+mv apps.txt /usr/local/share/nextcloud-apps.txt
 chmod o+x /usr/local/bin/*
 rm -r *
 # Set system unit states
