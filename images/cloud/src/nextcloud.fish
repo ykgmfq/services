@@ -70,9 +70,16 @@ function bake_app
     curl -fsSL $url | tar -xz -C $stage/apps
 end
 
-# Newest stable major from the GitHub "latest release" tag, e.g. v34.0.1 -> 34.
-set tag (curl -fsSL https://api.github.com/repos/nextcloud/server/releases/latest | jq -r .tag_name)
-set top (string replace -r '^v' '' -- $tag | string split .)[1]
+# Highest major across recent stable releases. GitHub's "latest release" endpoint
+# reports the most recently published one, which is regularly a maintenance release
+# of an older major, because Nextcloud patches every supported major on the same day.
+set releases https://api.github.com/repos/nextcloud/server/releases?per_page=100
+set majors '[.[] | select(.prerelease == false and .draft == false) | .tag_name | ltrimstr("v") | split(".")[0] | tonumber? // empty] | max'
+set top (curl -fsSL $releases | jq -r $majors)
+or begin
+    echo "Could not read the Nextcloud release list." >&2
+    exit 1
+end
 echo "Latest stable major | $top"
 
 resolve_major $top
