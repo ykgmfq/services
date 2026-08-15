@@ -50,11 +50,18 @@ spec:
         - name: PAPERLESS_AI_ENABLED
           value: "true"
         - name: PAPERLESS_AI_LLM_BACKEND
-          value: ollama
+          value: openai-like
         - name: PAPERLESS_AI_LLM_ENDPOINT
-          value: http://ollama:11434
+          value: https://api.anthropic.com/v1
         - name: PAPERLESS_AI_LLM_MODEL
-          value: gemma4:e4b
+          value: claude-haiku-4-5
+        - name: PAPERLESS_AI_LLM_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: claude_api
+              key: password
+        - name: PAPERLESS_AI_LLM_OUTPUT_LANGUAGE
+          value: de
         - name: PAPERLESS_AI_LLM_EMBEDDING_BACKEND
           value: ollama
         - name: PAPERLESS_AI_LLM_EMBEDDING_ENDPOINT

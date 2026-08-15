@@ -30,6 +30,7 @@ sync.fish   Deploy script: rclone systemd/ → /etc/containers/systemd/, validat
 - Service name = directory name = image tag = systemd unit name
 - Fish shell for all scripts — no bash
 - Buildah for image construction — no Dockerfile
+- Never write in-place backup copies onto a ZFS dataset, because the duplicated blocks inflate every later snapshot; use `zfs snapshot`
 - Human-facing text — markdown, comments, log messages, and commit messages — uses proper prose: full sentences, plain words, no terse shorthand
 - Documentation describes only the current state of the project; historical notes and migration stories belong in the git log, not in CLAUDE.md files
 - CLAUDE.md files facilitate discovery of the codebase — where things live, why the structure exists, non-obvious constraints — not restatement of implementation details that are plain from reading the code

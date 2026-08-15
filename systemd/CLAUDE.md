@@ -49,9 +49,11 @@ Vaultwarden uses SQLite at `/var/mnt/persist/vault/db.sqlite3`.
 Sensitive values are podman secrets.
 All secrets live under `/var/mnt/persist/secrets/`, in one of two formats:
 
-- **`<name>.yml`** (Kubernetes Secret YAML) — for single values injected as environment variables or referenced via `secretKeyRef`.
-  `/usr/local/bin/plain-secret.py <file>` extracts the first `stringData` value and creates a podman secret named `<metadata.name>_plain`, using `podman secret create --replace`; the `--suffix` flag overrides the default `_plain`.
-  The `.container` quadlets inject these with `Secret=<name>_plain,type=env,target=<ENV_VAR>`.
+- **`<name>.yml`** (Kubernetes Secret YAML) — for single values injected as environment variables.
+  How it is registered depends on which quadlet type consumes it, and the two forms are not interchangeable.
+  For a `.container` quadlet, `/usr/local/bin/plain-secret.py <file>` extracts the first `stringData` value and creates a podman secret named `<metadata.name>_plain`, using `podman secret create --replace`; the `--suffix` flag overrides the default `_plain`.
+  The quadlet then injects it with `Secret=<name>_plain,type=env,target=<ENV_VAR>`.
+  For a `.kube` quadlet referencing the secret via `secretKeyRef`, register the whole file instead with `podman secret create --replace <name> <file>`, because podman parses the stored secret as a Kubernetes Secret and rejects a bare value.
 - **`<name>.txt`** (plain text file) — for secrets that a service or the kernel reads directly as a file at runtime.
   These are registered with `podman secret create --replace <name> <file>`, using the bare name (no `_plain` suffix).
   `dyndns-password.txt` is loaded as a systemd credential via `LoadCredential` in `dyndns.service`.
