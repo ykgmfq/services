@@ -38,6 +38,15 @@ spec:
           value: deu+eng
         - name: PAPERLESS_OCR_CLEAN
           value: clean-final
+        - name: PAPERLESS_REMOTE_OCR_ENGINE
+          value: azureai
+        - name: PAPERLESS_REMOTE_OCR_ENDPOINT
+          value: https://paperless2132543643.cognitiveservices.azure.com/
+        - name: PAPERLESS_REMOTE_OCR_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: azure_paperless2132543643
+              key: key
         - name: PAPERLESS_DATA_DIR
           value: /usr/src/paperless/data
         - name: PAPERLESS_MEDIA_ROOT
