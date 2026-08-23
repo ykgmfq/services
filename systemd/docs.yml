@@ -106,7 +106,7 @@ spec:
         - mountPath: /var/lib/postgresql
           name: docs-db-pvc
     - name: redis
-      image: docker.io/valkey/valkey:8-alpine
+      image: docker.io/valkey/valkey:9-alpine
       livenessProbe:
         exec:
           command:

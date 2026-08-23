@@ -56,7 +56,7 @@ spec:
             - --spider
             - localhost:9000/health
         periodSeconds: 300
-    - image: docker.io/valkey/valkey:8-alpine
+    - image: docker.io/valkey/valkey:9-alpine
       name: redis
       livenessProbe:
         exec:
