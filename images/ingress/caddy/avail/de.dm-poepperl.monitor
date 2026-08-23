@@ -1,6 +1,0 @@
-monitor.dm-poepperl.de {
-  reverse_proxy immich-pod:2283
-  # Mozilla Observatory B+
-  import stdheader
-  encode zstd gzip
-}
