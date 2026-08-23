@@ -1,5 +1,5 @@
 nodered.dm-poepperl.de {
-  basicauth {
+  basic_auth {
     admin {env.NODERED_BASICAUTH}
   }
   reverse_proxy nodered:1880
