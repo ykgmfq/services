@@ -8,4 +8,14 @@ done
 php occ upgrade || test $? -eq 3
 # Baking only stages an app's code; app:enable is idempotent, so run it unconditionally here.
 xargs -a /usr/local/share/nextcloud-apps.txt -I{} php occ app:enable {}
+# The document server fetches files by container name, so that name has to be trusted.
+php occ config:system:set trusted_domains 3 --value=cloud-pod
+# The editor runs in the browser, so it needs the public host; the two servers
+# reach each other over the shared bridge network instead, which sidesteps the
+# pod's inability to resolve its own public name.
+php occ config:app:set eurooffice DocumentServerUrl --value=https://office.dm-poepperl.de/
+php occ config:app:set eurooffice DocumentServerInternalUrl --value=http://office/
+php occ config:app:set eurooffice StorageUrl --value=http://cloud-pod/
+php occ config:app:set eurooffice jwt_header --value=AuthorizationJwt
+php occ config:app:set eurooffice jwt_secret --value="$OFFICE_JWT_SECRET" >/dev/null
 php occ maintenance:mode --off

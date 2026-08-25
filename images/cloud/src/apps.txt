@@ -1,6 +1,6 @@
 calendar
 contacts
 mail
-onlyoffice
+eurooffice
 integration_openai
 previewgenerator

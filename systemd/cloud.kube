@@ -6,6 +6,7 @@ After=image-bootstrap@%N.service
 Yaml=/etc/containers/systemd/cloud.yml
 Network=cloud.network
 Network=ollama.network
+Network=office.network
 
 [Service]
 Restart=on-failure

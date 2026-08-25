@@ -13,6 +13,12 @@ spec:
   containers:
     - image: localhost/cloud:latest
       name: app
+      env:
+        - name: OFFICE_JWT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: office_jwt
+              key: secret
       ports:
         - name: web
           containerPort: 80

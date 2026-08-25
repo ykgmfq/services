@@ -1,0 +1,13 @@
+# Deliberately not stdheader: the editor is embedded from cloud.dm-poepperl.de,
+# which X-Frame-Options sameorigin would forbid, and its workers need blob: URLs
+# that a default-src https: policy rejects.
+office.dm-poepperl.de {
+  reverse_proxy office:80
+  import baseheader
+  header {
+    ?Content-Security-Policy "frame-ancestors https://cloud.dm-poepperl.de"
+    ?Referrer-Policy "strict-origin"
+    ?X-Content-Type-Options "nosniff"
+  }
+  encode zstd gzip
+}

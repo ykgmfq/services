@@ -6,4 +6,5 @@ User=cloud
 Type=oneshot
 WorkingDirectory=/usr/share/nextcloud
 Slice=cloud-maint.slice
+PassEnvironment=OFFICE_JWT_SECRET
 ExecStart=/usr/bin/bash /usr/local/bin/cloud-init.sh

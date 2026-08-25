@@ -20,6 +20,7 @@ Network=audiobookshelf.network
 Network=mosquitto.network
 Network=forgejo.network
 Network=nodered.network
+Network=office.network
 AutoUpdate=local
 ReadOnly=true
 Tmpfs=/config
