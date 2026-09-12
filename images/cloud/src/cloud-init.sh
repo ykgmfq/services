@@ -18,4 +18,9 @@ php occ config:app:set eurooffice DocumentServerInternalUrl --value=http://offic
 php occ config:app:set eurooffice StorageUrl --value=http://cloud-pod/
 php occ config:app:set eurooffice jwt_header --value=AuthorizationJwt
 php occ config:app:set eurooffice jwt_secret --value="$OFFICE_JWT_SECRET" >/dev/null
+# The Anthropic shim listens on loopback, which counts as a local remote server.
+php occ config:system:set allow_local_remote_servers --value=true --type=boolean
+php occ config:app:set integration_openai url --value=http://127.0.0.1:8081/v1
+php occ config:app:set integration_openai service_name --value=Anthropic
+php occ config:app:set integration_openai chat_endpoint_enabled --value=1
 php occ maintenance:mode --off

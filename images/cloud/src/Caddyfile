@@ -32,3 +32,23 @@
 	respond @forbidden 404
 	redir @dav /remote.php/dav permanent
 }
+
+# Anthropic speaks the OpenAI dialect at /v1/chat/completions but authenticates with
+# x-api-key, and its /v1/models is native-only, so the key is moved out of the Bearer
+# header and the model list is served from here.
+:8081 {
+	# A host in the site address makes Caddy infer TLS even with auto_https off.
+	bind 127.0.0.1
+	handle /v1/models {
+		header Content-Type application/json
+		respond `{"object":"list","data":[{"id":"claude-sonnet-5"},{"id":"claude-haiku-4-5"}]}`
+	}
+	handle {
+		reverse_proxy https://api.anthropic.com {
+			header_up Host api.anthropic.com
+			header_up x-api-key {header.Authorization}
+			header_up x-api-key "Bearer " ""
+			header_up -Authorization
+		}
+	}
+}
