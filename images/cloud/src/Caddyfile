@@ -1,6 +1,9 @@
 {
 	admin off
 	auto_https off
+	servers {
+		trusted_proxies static private_ranges
+	}
 	log default {
 		output stdout
 		level warn
@@ -10,23 +13,25 @@
 :80 {
 	root * /usr/share/nextcloud
 	file_server
-	php_fastcgi unix//run/php-fpm/cloud.sock
+	php_fastcgi unix//run/php-fpm/cloud.sock {
+		env HTTPS on
+	}
 	@dav {
 		path /.well-known/carddav
 		path /.well-known/caldav
 	}
 	@forbidden {
-		path /.htaccess
-		path /data/
-		path /config/
-		path /db_structure
-		path /.xml
-		path /README
-		path /3rdparty/
-		path /lib/
-		path /templates/*
-		path /occ
-		path /console.php
+		# Mirrors docs.nextcloud.com/server/stable/admin_manual/installation/nginx.html#nextcloud-in-the-webroot-of-nginx
+		path /build /build/*
+		path /tests /tests/*
+		path /config /config/*
+		path /lib /lib/*
+		path /3rdparty /3rdparty/*
+		path /templates /templates/*
+		path /data /data/*
+		path /.*
+		path /autotest* /occ* /issue* /indie* /db_* /console*
+		path /composer.json /composer.lock /package.json /package-lock.json /core/shipped.json
 	}
 	respond /alive "File server is alive!"
 	respond @forbidden 404
