@@ -20,7 +20,6 @@
 		?X-Frame-Options "sameorigin"
 		?Referrer-Policy "strict-origin"
 		?Content-Security-Policy "default-src https:"
-		?X-XSS-Protection "1; mode=block"
 		?X-Content-Type-Options "nosniff"
 	}
 }

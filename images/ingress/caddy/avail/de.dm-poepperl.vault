@@ -3,5 +3,5 @@
 vault.dm-poepperl.de {
   reverse_proxy vault:8087
   import stdheader
-  encode zstd gzip
+  encode
 }

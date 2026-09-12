@@ -6,5 +6,5 @@ dm-poepperl.de {
   respond 200
   # Mozilla Obeservatory A+
   import stdheader
-  encode zstd gzip
+  encode
  }

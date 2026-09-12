@@ -3,5 +3,4 @@
 home.dm-poepperl.de {
   reverse_proxy host.containers.internal:8123
   import stdheader
-  encode zstd gzip
 }

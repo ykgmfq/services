@@ -3,5 +3,4 @@
 cloud.dm-poepperl.de {
   reverse_proxy cloud-pod:80
   import stdheader
-  encode zstd gzip
 }

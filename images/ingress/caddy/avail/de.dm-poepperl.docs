@@ -1,7 +1,6 @@
 # Mozilla Observatory B+
-# https://observatory.mozilla.org/analyze/vault.dm-poepperl.de
+# https://observatory.mozilla.org/analyze/docs.dm-poepperl.de
 docs.dm-poepperl.de {
   reverse_proxy docs-pod:8000
   import stdheader
-  encode zstd gzip
 }

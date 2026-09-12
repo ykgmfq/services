@@ -9,5 +9,4 @@ office.dm-poepperl.de {
     ?Referrer-Policy "strict-origin"
     ?X-Content-Type-Options "nosniff"
   }
-  encode zstd gzip
 }

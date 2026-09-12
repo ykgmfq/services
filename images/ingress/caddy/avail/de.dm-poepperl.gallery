@@ -4,5 +4,5 @@ gallery.dm-poepperl.de {
   reverse_proxy immich-pod:2283
   import baseheader
 #  header Content-Security-Policy "default-src https:"
-  encode zstd gzip
+  encode
 }

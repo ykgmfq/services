@@ -4,5 +4,5 @@ audiobookshelf.dm-poepperl.de {
   reverse_proxy audiobookshelf:80
   import baseheader
 #  header Content-Security-Policy "default-src https:"
-  encode zstd gzip
+  encode
 }

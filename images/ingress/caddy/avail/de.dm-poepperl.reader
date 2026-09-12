@@ -4,5 +4,5 @@ reader.dm-poepperl.de {
   reverse_proxy freshrss:80
   import baseheader
 #  header Content-Security-Policy "default-src https:"
-  encode zstd gzip
+  encode
 }
