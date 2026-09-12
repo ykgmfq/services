@@ -15,9 +15,9 @@ echo "User ID    | $uid"
 set runtime bash tzdata curl openssl ca-certificates
 set install npm install --unsafe-perm --no-update-notifier --no-fund --omit=dev
 set config --workingdir /usr/src/node-red --user $uid:0 --port 1880
-set config $config --env NODE_PATH=/usr/src/node-red/node_modules:/data/node_modules
-set config $config --env FLOWS=flows.json
-set config $config --cmd '["/usr/src/node-red/node_modules/.bin/node-red", "--userDir", "/data"]'
+set --append config --env NODE_PATH=/usr/src/node-red/node_modules:/data/node_modules
+set --append config --env FLOWS=flows.json
+set --append config --cmd '["/usr/src/node-red/node_modules/.bin/node-red", "--userDir", "/data"]'
 set ctr (buildah from --pull docker.io/library/node:$node-alpine)
 and buildah run $ctr apk add --no-progress --no-cache $runtime
 and buildah run $ctr mkdir -p /usr/src/node-red /data

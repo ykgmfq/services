@@ -9,7 +9,7 @@ set idmedia 997
 set idscan 879
 set install (cat src/install.sh | string collect)
 set config --port 445
-set --append config --cmd 'sh /opt/entrypoint.sh'
+set --append config --cmd '["sh", "/opt/entrypoint.sh"]'
 set ctr (buildah from --pull docker.io/library/alpine:$alpine)
 and buildah run --env idscan=$idscan --env idmedia=$idmedia $ctr sh -c $install
 and buildah copy $ctr src/smb.conf /etc/samba/

@@ -48,7 +48,7 @@ function resolve_major
         set -l candidate (mktemp)
         curl -fsSL $store/platform/$m.0.0/apps.json -o $candidate
         or begin
-            rm -f $candidate
+            rm $candidate
             continue
         end
         if feed_has_all_apps $m $candidate
@@ -56,7 +56,7 @@ function resolve_major
             set -g feed $candidate
             return 0
         end
-        rm -f $candidate
+        rm $candidate
     end
     return 1
 end
@@ -100,4 +100,4 @@ for a in $apps
     or exit 1
 end
 
-rm -f $feed
+rm $feed

@@ -13,7 +13,7 @@ echo "User ID    | $uid"
 set stage (mktemp -d)
 fish ./src/nextcloud.fish $stage
 or begin
-    rm -rf $stage
+    rm -r $stage
     exit 1
 end
 # Single image: Fedora php-fpm + Caddy + the baked, read-only Nextcloud tree.
@@ -25,7 +25,7 @@ and buildah run $ctr bash /tmp/install.sh $uid
 and buildah copy --chown root:root $ctr $stage /usr/share/nextcloud
 and buildah commit --rm $ctr $tag
 or begin
-    rm -rf $stage
+    rm -r $stage
     abort $ctr
 end
-rm -rf $stage
+rm -r $stage
