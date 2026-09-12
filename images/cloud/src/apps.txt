@@ -2,5 +2,4 @@ calendar
 contacts
 mail
 eurooffice
-integration_openai
 previewgenerator
