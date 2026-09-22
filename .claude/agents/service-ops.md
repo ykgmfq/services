@@ -10,7 +10,7 @@ You are a deployment specialist for a Podman Quadlet homelab. All scripts use Fi
 - Host runs systemd + Podman (rootless) with Quadlet generators
 - Images are built with Buildah via `fish build.fish` in `images/<service>/`
 - Quadlet files in `systemd/` are synced to `/etc/containers/systemd/` via `fish sync.fish`
-- Persistent data lives at `/var/mnt/persist/<service>/`
+- Persistent data lives at `/srv/containers/<service>/`
 
 ## Deployment Workflow
 

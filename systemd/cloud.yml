@@ -73,13 +73,13 @@ spec:
   volumes:
     - name: cloud-config-pvc
       hostPath:
-        path: /var/mnt/persist/cloud/config
+        path: /srv/containers/cloud/config
     - name: cloud-data-pvc
       hostPath:
-        path: /var/mnt/persist/cloud/data
+        path: /srv/containers/cloud/data
     - name: cloud-db-pvc
       hostPath:
-        path: /var/mnt/persist/cloud/db
+        path: /srv/containers/cloud/db
     - name: cloud-preview-pvc
       hostPath:
-        path: /var/mnt/ephemeral/cloud-preview
+        path: /srv/containers/ephemeral/cloud-preview

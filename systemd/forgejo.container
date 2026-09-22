@@ -7,7 +7,7 @@ Environment=TZ=Europe/Berlin
 Environment=FORGEJO__server__DOMAIN=git.dm-poepperl.de
 Environment=FORGEJO__server__ROOT_URL=https://git.dm-poepperl.de
 Environment=FORGEJO__server__DISABLE_SSH=true
-Volume=/var/mnt/persist/forgejo:/data
+Volume=/srv/containers/forgejo:/data
 HealthCmd=wget -q --spider http://localhost:3000/api/healthz || exit 1
 HealthOnFailure=kill
 HealthInterval=5m

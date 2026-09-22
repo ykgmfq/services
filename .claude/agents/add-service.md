@@ -7,8 +7,8 @@ You are a service scaffolding specialist for a Podman Quadlet homelab. Domain: `
 
 ## Checklist for Every New Service
 
-1. **ZFS dataset** (if persistent storage needed): `zfs create data/persist/<service>`
-   - Mounts automatically at `/var/mnt/persist/<service>/`
+1. **ZFS dataset** (if persistent storage needed): `zfs create -o mountpoint=/srv/containers/<service> data/persist/<service>`
+   - `/srv/containers` already carries a `container_file_t` SELinux file-context rule from `container-selinux`, so no `semanage fcontext`/`restorecon` step is needed.
 
 2. **`systemd/<service>.network`** — empty network definition:
    ```
@@ -20,7 +20,7 @@ You are a service scaffolding specialist for a Podman Quadlet homelab. Domain: `
    - `ContainerName=<service>`
    - `Network=<service>.network`
    - `Environment=TZ=Europe/Berlin`
-   - `Volume=/var/mnt/persist/<service>:/data` (if persistent)
+   - `Volume=/srv/containers/<service>:/data` (if persistent)
    - `HealthCmd=wget -q --spider http://localhost:<port>/health || exit 1`
    - `HealthOnFailure=kill` + `HealthInterval=5m`
    - `Slice=prod-tier0.slice` (critical) or `prod-tier1.slice` (best-effort)

@@ -23,10 +23,15 @@ You can also use the VS Code tasks "sync services", "daemon", "isolate multi-use
 
 | Path | Purpose | Backed up |
 |---|---|---|
-| `/var/mnt/persist/<service>/` | Persistent app data, databases | Yes (ZFS snapshots) |
-| `/var/mnt/persist/<service>/db/` | PostgreSQL data dirs | Yes |
-| `/var/mnt/ephemeral/` | Caches, downloads, this repo | No |
+| `/srv/containers/<service>/` | Persistent app data, databases | Yes (ZFS snapshots) |
+| `/srv/containers/<service>/db/` | PostgreSQL data dirs | Yes |
+| `/srv/containers/ephemeral/` | Caches, downloads | No |
+| `/var/mnt/ephemeral/` | This repo | No |
 | Podman PVCs | Ephemeral managed volumes | No |
+
+`data/persist` and `data/ephemeral` mount at `/srv/containers` and `/srv/containers/ephemeral` respectively; every service dataset underneath inherits its path from there (`data/persist/cloud` → `/srv/containers/cloud`, `data/ephemeral/podcasts` → `/srv/containers/ephemeral/podcasts`).
+`container-selinux` ships a `container_file_t` file-context rule for `/srv/containers` by default, so nothing under it needs a custom `semanage fcontext` rule.
+`data/persist/virt` is the one exception, mounted separately at `/var/lib/libvirt/images` for libvirt's own SELinux labeling.
 
 
 ## Database Management
@@ -35,19 +40,19 @@ You can also use the VS Code tasks "sync services", "daemon", "isolate multi-use
 
 PostgreSQL is used by cloud, docs, and immich.
 The password is `a`, which is safe because the database is only reachable on the internal pod network.
-Data lives in `/var/mnt/persist/<service>/db`.
+Data lives in `/srv/containers/<service>/db`.
 
 Major-version upgrades use `fish update-pg.fish <service> <target-major>`.
 PostgreSQL 18 and later use the `/var/lib/postgresql/<major>/docker` layout.
 
 ### SQLite (Vault)
 
-Vaultwarden uses SQLite at `/var/mnt/persist/vault/db.sqlite3`.
+Vaultwarden uses SQLite at `/srv/containers/vault/db.sqlite3`.
 
 ## Secret Management
 
 Sensitive values are podman secrets.
-All secrets live under `/var/mnt/persist/secrets/`, in one of two formats:
+All secrets live under `/srv/containers/secrets/`, in one of two formats:
 
 - **`<name>.yml`** (Kubernetes Secret YAML) — for single values injected as environment variables.
   How it is registered depends on which quadlet type consumes it, and the two forms are not interchangeable.

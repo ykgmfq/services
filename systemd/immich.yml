@@ -78,16 +78,16 @@ spec:
   volumes:
     - name: immich-pvc
       hostPath:
-        path: /var/mnt/persist/immich
+        path: /srv/containers/immich
     - name: test-pvc
       hostPath:
-        path: /var/mnt/persist/test
+        path: /srv/containers/test
     - name: immich-db-pvc
       hostPath:
-        path: /var/mnt/persist/immich/db
+        path: /srv/containers/immich/db
     - name: cloud-pvc
       hostPath:
-        path: /var/mnt/persist/cloud/data/dmp/files/Bilder
+        path: /srv/containers/cloud/data/dmp/files/Bilder
         readOnly: true
     - name: immich-modelcache-pvc
       persistentVolumeClaim:

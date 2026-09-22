@@ -124,10 +124,10 @@ spec:
   volumes:
     - name: docs-db-pvc
       hostPath:
-        path: /var/mnt/persist/docs/db
+        path: /srv/containers/docs/db
     - name: docs-pvc
       hostPath:
-        path: /var/mnt/persist/docs
+        path: /srv/containers/docs
     - name: docs-thumbnails-pvc
       persistentVolumeClaim:
         claimName: docs-thumbnails
@@ -136,5 +136,5 @@ spec:
         claimName: docs-scan
     - name: pdf-passwords
       hostPath:
-        path: /var/mnt/persist/secrets/pdf_passwords.txt
+        path: /srv/containers/secrets/pdf_passwords.txt
         type: File

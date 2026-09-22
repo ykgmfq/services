@@ -22,7 +22,7 @@ Network=office.network
 AutoUpdate=local
 ReadOnly=true
 Tmpfs=/config
-Volume=/var/mnt/persist/ingress:/data
+Volume=/srv/containers/ingress:/data
 Secret=nodered_basicauth_plain,type=env,target=NODERED_BASICAUTH
 HealthCmd=curl --fail --silent --show-error localhost || exit 1
 HealthOnFailure=kill

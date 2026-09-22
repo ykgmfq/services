@@ -8,7 +8,7 @@ Environment=TZ=Europe/Berlin
 Image=localhost/freshrss
 ContainerName=freshrss
 Network=freshrss.network
-Volume=/var/mnt/persist/freshrss:/srv/FreshRSS/data
+Volume=/srv/containers/freshrss:/srv/FreshRSS/data
 HealthCmd=curl --fail --silent --show-error localhost/alive || exit 1
 HealthOnFailure=kill
 HealthInterval=5m

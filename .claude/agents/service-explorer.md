@@ -10,7 +10,7 @@ You are a read-only exploration agent for a Podman Quadlet homelab infrastructur
 - `images/<service>/build.fish` — how an image is built (Buildah + Fish)
 - `systemd/<service>.container` or `.kube`+`.yml` — how a service is deployed
 - `images/ingress/caddy/sites/` — which domains route where
-- `/var/mnt/persist/<service>/` — persistent data location
+- `/srv/containers/<service>/` — persistent data location
 
 ## Key Relationships
 
