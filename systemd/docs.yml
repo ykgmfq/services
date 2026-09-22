@@ -61,14 +61,11 @@ spec:
         - name: PAPERLESS_AI_LLM_BACKEND
           value: openai-like
         - name: PAPERLESS_AI_LLM_ENDPOINT
-          value: https://api.anthropic.com/v1
+          value: http://127.0.0.1:4000
         - name: PAPERLESS_AI_LLM_MODEL
           value: claude-haiku-4-5
         - name: PAPERLESS_AI_LLM_API_KEY
-          valueFrom:
-            secretKeyRef:
-              name: claude_api
-              key: password
+          value: unused
         - name: PAPERLESS_AI_LLM_OUTPUT_LANGUAGE
           value: de
         - name: PAPERLESS_AI_LLM_EMBEDDING_BACKEND
@@ -113,6 +110,19 @@ spec:
             - redis-cli
             - ping
         periodSeconds: 300
+    - name: litellm
+      image: localhost/litellm:latest
+      livenessProbe:
+        httpGet:
+          path: /health/liveliness
+          port: 4000
+        periodSeconds: 300
+      env:
+        - name: ANTHROPIC_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: claude_api
+              key: password
   volumes:
     - name: docs-db-pvc
       hostPath:

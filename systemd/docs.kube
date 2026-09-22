@@ -1,6 +1,7 @@
 [Unit]
 Wants=image-bootstrap@%N.service image-build@%N.timer ollama.service
-After=image-bootstrap@%N.service ollama.service
+Wants=image-bootstrap@litellm.service image-build@litellm.timer
+After=image-bootstrap@%N.service image-bootstrap@litellm.service ollama.service
 
 [Kube]
 Yaml=/etc/containers/systemd/docs.yml
