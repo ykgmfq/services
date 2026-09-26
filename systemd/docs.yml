@@ -5,6 +5,7 @@ metadata:
   annotations:
     io.containers.autoupdate: registry
     io.containers.autoupdate/app: local
+    io.containers.autoupdate/litellm: local
   labels:
     app: docs-pod
   name: docs-pod
@@ -112,11 +113,6 @@ spec:
         periodSeconds: 300
     - name: litellm
       image: localhost/litellm:latest
-      livenessProbe:
-        httpGet:
-          path: /health/liveliness
-          port: 4000
-        periodSeconds: 300
       env:
         - name: ANTHROPIC_API_KEY
           valueFrom:
