@@ -1,6 +1,6 @@
 [Unit]
-Wants=image-bootstrap@%N.service image-build@%N.timer
-After=image-bootstrap@%N.service
+Wants=image-bootstrap@%N.service image-build@%N.timer office.service
+After=image-bootstrap@%N.service office.service
 
 [Kube]
 Yaml=/etc/containers/systemd/cloud.yml
