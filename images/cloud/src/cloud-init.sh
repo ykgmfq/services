@@ -10,6 +10,9 @@ php occ upgrade || test $? -eq 3
 xargs -a /usr/local/share/nextcloud-apps.txt -I{} php occ app:enable {}
 # The document server fetches files by container name, so that name has to be trusted.
 php occ config:system:set trusted_domains 3 --value=cloud-pod
+# The push daemon calls Nextcloud from loopback and must be a trusted proxy; setup's self-test needs the running daemon, so only the endpoint is set here.
+php occ config:system:set trusted_proxies 1 --value=127.0.0.1
+php occ config:app:set notify_push base_endpoint --value=https://cloud.dm-poepperl.de/push
 # The editor runs in the browser, so it needs the public host; the two servers
 # reach each other over the shared bridge network instead, which sidesteps the
 # pod's inability to resolve its own public name.

@@ -3,3 +3,4 @@ contacts
 mail
 eurooffice
 previewgenerator
+notify_push

@@ -33,6 +33,9 @@
 		path /autotest* /occ* /issue* /indie* /db_* /console*
 		path /composer.json /composer.lock /package.json /package-lock.json /core/shipped.json
 	}
+	handle_path /push/* {
+		reverse_proxy 127.0.0.1:7867
+	}
 	respond /alive "File server is alive!"
 	respond @forbidden 404
 	redir @dav /remote.php/dav permanent

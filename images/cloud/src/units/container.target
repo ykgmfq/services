@@ -1,4 +1,4 @@
 [Unit]
-Wants=caddy.service cloud-bg-worker@0.service cloud-bg-worker@1.service cloud-bg-worker@2.service
+Wants=caddy.service cloud-bg-worker@0.service cloud-bg-worker@1.service cloud-bg-worker@2.service cloud-notify-push.service
 Requires=cloud-init.service php-fpm.service
 After=cloud-init.service php-fpm.service

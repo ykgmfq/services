@@ -1,0 +1,9 @@
+[Unit]
+After=cloud-init.service
+
+[Service]
+User=cloud
+Environment=NEXTCLOUD_URL=http://localhost
+ExecStart=/usr/share/nextcloud/apps/notify_push/bin/x86_64/notify_push /usr/share/nextcloud/config/config.php
+Restart=always
+RestartSec=10
