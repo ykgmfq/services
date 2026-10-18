@@ -64,7 +64,7 @@ spec:
         - name: PAPERLESS_AI_LLM_ENDPOINT
           value: http://127.0.0.1:4000
         - name: PAPERLESS_AI_LLM_MODEL
-          value: haiku
+          value: small
         - name: PAPERLESS_AI_LLM_API_KEY
           value: a
         - name: PAPERLESS_AI_LLM_OUTPUT_LANGUAGE
@@ -116,11 +116,11 @@ spec:
       env:
         - name: LITELLM_MASTER_KEY
           value: a
-        - name: ANTHROPIC_API_KEY
+        - name: AZURE_OPENAI_API_KEY
           valueFrom:
             secretKeyRef:
-              name: claude_api
-              key: password
+              name: azure_openai
+              key: key
   volumes:
     - name: docs-db-pvc
       hostPath:
