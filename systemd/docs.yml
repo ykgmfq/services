@@ -64,7 +64,7 @@ spec:
         - name: PAPERLESS_AI_LLM_ENDPOINT
           value: http://127.0.0.1:4000
         - name: PAPERLESS_AI_LLM_MODEL
-          value: claude-haiku-4-5
+          value: haiku
         - name: PAPERLESS_AI_LLM_API_KEY
           value: unused
         - name: PAPERLESS_AI_LLM_OUTPUT_LANGUAGE
