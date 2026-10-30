@@ -25,6 +25,7 @@ echo "User ID | $USERMAP_UID"
 echo "Branch  | $branch"
 set ctr (buildah from --pull $url:$branch)
 and buildah add $ctr install.sh /tmp/install.sh
+and buildah add $ctr removepassword.py /tmp/removepassword.py
 and buildah run $ctr bash /tmp/install.sh $PAPERLESS_LOGGING_DIR $PAPERLESS_PRE_CONSUME_SCRIPT
 and buildah config $config $ctr
 and buildah commit --rm $ctr $tag
