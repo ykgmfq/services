@@ -5,10 +5,9 @@ After=image-bootstrap@%N.service
 [Container]
 Network=ingress.network
 Image=localhost/ingress
+# No separate [::] ports: duplicate rules make netavark's teardown fail and leave stale DNAT entries
 PublishPort=443:443
-PublishPort=[::]:443:443
 PublishPort=80:80
-PublishPort=[::]:80:80
 Network=cloud.network
 Network=docs.network
 Network=immich.network
