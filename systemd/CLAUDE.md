@@ -26,7 +26,7 @@ You can also use the VS Code tasks "sync services", "daemon", "isolate multi-use
 | `/srv/containers/<service>/` | Persistent app data, databases | Yes (ZFS snapshots) |
 | `/srv/containers/<service>/db/` | PostgreSQL data dirs | Yes |
 | `/srv/containers/ephemeral/` | Caches, downloads | No |
-| `/var/mnt/ephemeral/` | This repo | No |
+| `/srv/containers/ephemeral/services/` | This repo | No |
 | Podman PVCs | Ephemeral managed volumes | No |
 
 `data/persist` and `data/ephemeral` mount at `/srv/containers` and `/srv/containers/ephemeral` respectively; every service dataset underneath inherits its path from there (`data/persist/cloud` → `/srv/containers/cloud`, `data/ephemeral/podcasts` → `/srv/containers/ephemeral/podcasts`).
