@@ -3,4 +3,6 @@
 home.dm-poepperl.de {
   reverse_proxy host.containers.internal:8123
   import stdheader
+  # The frontend bootstraps from an inline script and loads resources
+  header Content-Security-Policy "default-src https: wss:; script-src https: 'unsafe-inline' 'unsafe-eval'; style-src https: 'unsafe-inline'; img-src https: data: blob:; media-src https: data: blob:; worker-src 'self' blob:; frame-ancestors 'self'"
 }
